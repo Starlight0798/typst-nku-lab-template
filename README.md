@@ -50,4 +50,4 @@ Typst WebApp：https://typst.app/
 
 ### 效果
 
-![demo](assets/demo.svg)
+![demo](demo.png)
