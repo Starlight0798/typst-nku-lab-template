@@ -50,12 +50,4 @@ Typst WebApp：https://typst.app/
 
 ### 效果
 
-![image-20240331125832175](assets/image-20240331125832175.png)
-
-<img src="assets/image-20240331125852239.png" alt="image-20240331125852239" style="zoom: 67%;" />
-
-<img src="assets/image-20240331125910285.png" alt="image-20240331125910285" style="zoom:67%;" />
-
-<img src="assets/image-20240331125920446.png" alt="image-20240331125920446" style="zoom:67%;" />
-
-<img src="assets/image-20240331125930358.png" alt="image-20240331125930358" style="zoom:67%;" />
+![demo](../../模板/typst-nku/demo.svg)
