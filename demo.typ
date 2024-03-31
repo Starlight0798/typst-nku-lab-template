@@ -18,6 +18,8 @@
 #import "@preview/algo:0.3.3": algo, i, d, comment, code
 #import "@preview/ctheorems:1.1.2": *
 #import "@preview/diagraph:0.2.1": *
+#import "@preview/xarrow:0.3.0": xarrow, xarrowSquiggly, xarrowTwoHead
+#import "@preview/drafting:0.2.0" : *
 
 #show: project.with(
   course: "计算机网络",
@@ -27,6 +29,7 @@
   major: "土木工程",
   department: "火星土木学院",
   date: (2077, 1, 1),
+  show_content_figure: false
 )
 
 #let mytest = [通过这次实验，我深刻体会到了同态加密技术的强大和实用性，特别是在保护数据隐私的同时执行复杂计算的能力。使用Microsoft SEAL库进行加密计算不仅加深了我对同态加密原理的理解，也提升了我的编程技能和解决实际问题的能力。]
@@ -48,20 +51,14 @@ void MergeSort(int arr[], int left, int right) {
 }
 ```
 
-= 一级标题1
+= 一级标题
 #lorem(20) \
 测试中文:\
 #indent() _#mytest _
 
-== 二级标题1
+== 二级标题
 #lorem(20)
-
-= 一级标题2
-#lorem(20)
-
-== 二级标题2
-#lorem(20)
-#img(image("./img/NKU-logo.png", width: 10%), caption: "南开大学校徽")
+#figure(image("./img/NKU-logo.png", width: 10%), caption: "南开大学校徽")
 
 分点：
 + _#lorem(10) _
@@ -70,14 +67,9 @@ void MergeSort(int arr[], int left, int right) {
 - _#lorem(10) _
 - _#lorem(10) _
 
-= 一级标题1
-#lorem(10)
-
-== 二级标题1
-#lorem(20)
-
-#rect[*测试tablex & tbl*:]
-#tbl(
+== *测试tablex*
+#figure(
+  supplement: [表],
   caption: "一个表格",
   tablex(
   columns: 4,
@@ -139,7 +131,15 @@ void MergeSort(int arr[], int left, int right) {
 ),
 )
 
-#rect[*测试cetz*:]
+== *测试codly*
+```rust
+pub fn main() {
+    println!("Hello, world!");
+}
+```
+#mycode
+
+== *测试cetz*
 #let data = (
   ([Belgium], 24),
   ([Germany], 31),
@@ -153,26 +153,29 @@ void MergeSort(int arr[], int left, int right) {
   ([Turkey], 13),
 )
 
-#cetz.canvas({
-  import cetz.chart
-  import cetz.draw: *
-  
-  let colors = gradient.linear(red, blue, green, yellow)
-  
-  chart.piechart(
-    data,
-    value-key: 1,
-    label-key: 0,
-    radius: 4,
-    slice-style: colors,
-    inner-radius: 1,
-    outset: 3,
-    inner-label: (content: (value, label) => [#text(white, str(value))], radius: 110%),
-    outer-label: (content: "%", radius: 110%),
-  )
-})
+#figure(
+  caption: "饼图",
+  cetz.canvas({
+    import cetz.chart
+    import cetz.draw: *
+    
+    let colors = gradient.linear(red, blue, green, yellow)
+    
+    chart.piechart(
+      data,
+      value-key: 1,
+      label-key: 0,
+      radius: 4,
+      slice-style: colors,
+      inner-radius: 1,
+      outset: 3,
+      inner-label: (content: (value, label) => [#text(white, str(value))], radius: 110%),
+      outer-label: (content: "%", radius: 110%),
+    )
+  }),
+)
 
-#rect[*测试pinit*:]
+== *测试pinit*
 
 #text(size: 16pt)[
   A simple #pin(1)highlighted text#pin(2).
@@ -183,7 +186,7 @@ void MergeSort(int arr[], int left, int right) {
 
 #pagebreak()
 
-#rect[*测试colorbox*:]
+== *测试colorbox*
 #colorbox(title: lorem(5), color: "blue")[
   #lorem(30)
 ]
@@ -200,7 +203,7 @@ void MergeSort(int arr[], int left, int right) {
   #lorem(50)
 ]
 
-#rect[*测试showybox*:]
+== *测试showybox*
 // First showybox
 #showybox(
   frame: (border-color: red.darken(50%), title-color: red.lighten(60%), body-color: red.lighten(80%)),
@@ -228,7 +231,7 @@ void MergeSort(int arr[], int left, int right) {
     size: 10pt,
     weight: 600,
     emph("This will be useful every
-                                                      time you want to interchange partial derivatives in the future."),
+                                                          time you want to interchange partial derivatives in the future."),
   ),
 )[
   Let $f: A arrow RR$ with $A subset RR^n$ an open set such that its cross derivatives of any order exist and are
@@ -330,7 +333,7 @@ void MergeSort(int arr[], int left, int right) {
 #box(chord("x,9,7,8,9,9"))
 
 // https://xkcd.com/1195/
-#rect[*测试fletcher*:]
+== *测试fletcher*
 #import fletcher.shapes: diamond
 #fletcher.diagram(
   node-stroke: 1pt,
@@ -396,7 +399,7 @@ void MergeSort(int arr[], int left, int right) {
   blob((2, 2), [Feed\ Forward], tint: blue),
 )
 
-#rect[*测试gentle*:]
+== *测试gentle*
 // info clue 
 #info[ This is the info clue ... ]
 // or a tip
@@ -405,7 +408,7 @@ void MergeSort(int arr[], int left, int right) {
 #quote[ This is the info clue ... ]
 #example[ This is the info clue ... ]
 
-#rect[*测试badgery*:]
+== *测试badgery*
 #badge-gray("Gray badge")
 #badge-red("Red badge")
 #badge-yellow("Yellow badge") \
@@ -416,7 +419,7 @@ void MergeSort(int arr[], int left, int right) {
 #menu("File", "New File...")
 #menu("Menu", "Sub-menu", "Sub-sub menu", "Action")
 
-#rect[*测试chromo*:]
+== *测试chromo*
 #box(
   height: 68pt,
   columns(2, gutter: 11pt)[
@@ -427,13 +430,13 @@ void MergeSort(int arr[], int left, int right) {
 )
 
 #pagebreak()
-#rect[*测试riesketcher*:]
+== *测试riesketcher*
 #canvas({
   riesketcher(x => calc.pow(x, 3) + 4, method: "left", start: -3.1, end: 3.5, n: 10, plot-x-tick-step: 1)
 })
 
-#rect[*测试syntree*:]
-#img(
+== *测试syntree*
+#figure(
   caption: "Example of a syntax tree.",
   syntree(
     nonterminal: (fill: blue),
@@ -442,7 +445,7 @@ void MergeSort(int arr[], int left, int right) {
   ),
 )
 
-#rect[*测试mitex*:]
+== *测试mitex*
 #mitex(`
   \newcommand{\f}[2]{#1f(#2)}
   \f\relax{x} = \int_{-\infty}^\infty
@@ -450,24 +453,28 @@ void MergeSort(int arr[], int left, int right) {
     \,d\xi
 `)
 
-#rect[*测试easytable*:]
-#easytable({
-  let th = th.with(trans: emph)
-  let tr = tr.with(cell_style: (x: none, y: none) => (
-    fill: if calc.even(y) {
-      luma(95%)
-    } else {
-      none
-    },
-  ))
-  
-  th[Header 1][Header 2][Header 3]
-  tr[How][I][want]
-  tr[a][drink,][alcoholic]
-  tr[of][course,][after]
-  tr[the][heavy][lectures]
-  tr[involving][quantum][mechanics.]
-})
+== *测试easytable*
+#figure(
+  easytable({
+    let th = th.with(trans: emph)
+    let tr = tr.with(cell_style: (x: none, y: none) => (
+      fill: if calc.even(y) {
+        luma(95%)
+      } else {
+        none
+      },
+    ))
+    
+    th[Header 1][Header 2][Header 3]
+    tr[How][I][want]
+    tr[a][drink,][alcoholic]
+    tr[of][course,][after]
+    tr[the][heavy][lectures]
+    tr[involving][quantum][mechanics.]
+  }),
+  caption: [表格示例],
+  supplement: [表],
+)
 
 #easytable({
   cwidth(100pt, 1fr, 20%)
@@ -491,7 +498,7 @@ void MergeSort(int arr[], int left, int right) {
   tr[involving][quantum][mechanics.]
 })
 
-#rect[*测试algo*:]
+== *测试algo*
 #algo(
   title: [ // note that title and parameters
     #set text(size: 15pt) // can be content
@@ -550,15 +557,7 @@ void MergeSort(int arr[], int left, int right) {
   Return $"dist"$
 ]
 
-#rect[*测试codly*:]
-```rust
-pub fn main() {
-    println!("Hello, world!");
-}
-```
-#mycode
-
-#rect[*测试theorems*:]
+== *测试theorems*
 #show: thmrules
 #let theorem = thmbox("theorem", "Theorem", fill: rgb("#eeffee"))
 #let corollary = thmplain("corollary", "Corollary", base: "theorem", titlefmt: strong)
@@ -599,7 +598,7 @@ pub fn main() {
   $
 ]
 
-#rect[*测试diagraph*:]
+== *测试diagraph*
 #raw-render(
   ```
   digraph {
@@ -611,10 +610,33 @@ pub fn main() {
     big -> sum
   }
   ```,
-  labels: (
-    big: [_some_#text(2em)[ big ]*text*],
-    sum: $ sum_(i=0)^n 1/i $, 
-  ),
-  width: 100%
+  labels: (big: [_some_#text(2em)[ big ]*text*], sum: $ sum_(i=0)^n 1 / i $),
+  width: 100%,
 )
 
+== *测试xarrow*
+$
+a xarrow(sym: <--, QQ\, 1 + 1^4) b \
+  c xarrowSquiggly("very long boi") d \
+  c / ( a xarrowTwoHead("NP" limits(sum)^*) b times 4)
+$
+
+== *测试drafting*
+
+#set-page-properties()
+#lorem(20)
+#margin-note(side: left)[Hello, world!]
+#lorem(10)
+#margin-note[When notes are about to overlap, they're automatically shifted]
+#margin-note(stroke: aqua + 3pt)[To avoid collision]
+#lorem(25)
+#margin-note(stroke: green, side: left)[You can provide two positional arguments if you want to highlight a phrase associated with your note.][The first is text which should be inline-noted, and the second is the standard margin note.]
+
+#let caution-rect = rect.with(inset: 1em, radius: 0.5em, fill: orange.lighten(80%))
+#inline-note(rect: caution-rect)[
+  Be aware that `typst` will complain when 4 notes overlap, and stop automatically avoiding collisions when 5 or more notes
+  overlap. This is because the compiler stops attempting to reposition notes after a few attempts
+  (initial layout + adjustment for each note).
+
+  You can manually adjust the position of notes with `dy` to silence the warning.
+]

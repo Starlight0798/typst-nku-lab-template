@@ -1,5 +1,6 @@
 #import "@preview/chic-hdr:0.4.0": *
 #import "@preview/codly:0.2.0": *
+#import "@preview/i-figured:0.2.4"
 
 #let Heiti = ("Times New Roman", "Heiti SC", "Heiti TC", "SimHei")
 #let Songti = ("Times New Roman", "Songti SC", "Songti TC", "SimSun")
@@ -8,32 +9,6 @@
 
 #let indent() = {
   box(width: 2em)
-}
-
-#let table_num(_) = {
-  locate(loc => {
-    let chapt = counter(heading).at(loc).at(0)
-    let c = counter("table-chapter" + str(chapt))
-    let n = c.at(loc).at(0)
-    str(chapt) + "-" + str(n + 1)
-  })
-}
-
-#let image_num(_) = {
-  locate(loc => {
-    let chapt = counter(heading).at(loc).at(0)
-    let c = counter("image-chapter" + str(chapt))
-    let n = c.at(loc).at(0)
-    str(chapt) + "-" + str(n + 1)
-  })
-}
-
-#let tbl(tbl, caption: "") = {
-  figure(tbl, caption: caption, supplement: [表], numbering: table_num, kind: "table")
-}
-
-#let img(img, caption: "") = {
-  figure(img, caption: caption, supplement: [图], numbering: image_num, kind: "image")
 }
 
 #let info_key(body) = {
@@ -50,8 +25,9 @@
 }
 
 #let chinese_outline() = {
+  v(-2em)
   align(center)[
-    #text(font: Heiti, size: 18pt, "目　　录")
+    #text(font: Xbs, size: 18pt, "目　　录")
   ]
   
   set text(
@@ -114,6 +90,7 @@
   major: "MAJOR",
   department: "DEPARTMENT",
   date: (2024, 3, 30),
+  show_content_figure: false,
   body,
 ) = {
   set page("a4")
@@ -165,6 +142,16 @@
   
   // 目录 
   chinese_outline()
+  v(0.5em)
+  if show_content_figure {
+    text(font: Xbs, size: 10pt)[
+      #set par(
+        justify: true,
+        leading: 1.0em,
+      )
+      #i-figured.outline(title: [图表])
+    ]
+  }
   pagebreak()
   
   // 页眉页脚设置
@@ -191,11 +178,14 @@
   )
   
   // 正文设置
+  set heading(numbering: "1.1")
+  set figure(supplement: [图])
+  show heading: i-figured.reset-counters.with(level: 2)
+  show figure: i-figured.show-figure.with(level: 2)
   set text(
     font: Songti,
-    12pt,
+    size: 12pt,
   )
-  set heading(numbering: "1.1")
   set par(
     justify: true,
     leading: 1.04em,
