@@ -111,7 +111,7 @@
     #v(1em)
     
     // 报告名
-    #text(size: 25pt, font: Xbs)[
+    #text(size: 22pt, font: Xbs)[
       _#lab_name _
     ]
     #image("./img/NKU-logo.png", width: 40%)
@@ -162,9 +162,10 @@
           #course -- #lab_name
         ],
       ),
-      right-side: text(size: 11pt, font: Xbs)[
+      right-side: text(size: 10pt, font: Xbs)[
         #chic-heading-name(dir: "prev")
       ],
+      side-width: (60%, 0%, 35%),
     ),
     chic-footer(
       center-side: text(size: 11pt, font: Xbs)[
