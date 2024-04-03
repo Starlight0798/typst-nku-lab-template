@@ -89,7 +89,7 @@
   stu_num: "1234567",
   major: "MAJOR",
   department: "DEPARTMENT",
-  date: (2024, 3, 30),
+  date: (2077, 1, 1),
   show_content_figure: false,
   body,
 ) = {

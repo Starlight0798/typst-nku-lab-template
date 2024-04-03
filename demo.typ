@@ -5,7 +5,7 @@
 #import "@preview/colorful-boxes:1.3.1": *
 #import "@preview/showybox:2.0.1": *
 #import "@preview/conchord:0.2.0": *
-#import "@preview/fletcher:0.4.2" as fletcher: node, edge
+#import "@preview/fletcher:0.4.3" as fletcher: node, edge
 #import "@preview/gentle-clues:0.7.1": *
 #import "@preview/badgery:0.1.1": ui-action, menu, badge-gray, badge-red, badge-yellow, badge-green, badge-blue, badge-purple
 #import "@preview/chic-hdr:0.4.0": *
@@ -19,7 +19,7 @@
 #import "@preview/ctheorems:1.1.2": *
 #import "@preview/diagraph:0.2.1": *
 #import "@preview/xarrow:0.3.0": xarrow, xarrowSquiggly, xarrowTwoHead
-#import "@preview/drafting:0.2.0" : *
+#import "@preview/drafting:0.2.0": *
 
 #show: project.with(
   course: "计算机网络",
@@ -29,7 +29,7 @@
   major: "土木工程",
   department: "火星土木学院",
   date: (2077, 1, 1),
-  show_content_figure: false
+  show_content_figure: false,
 )
 
 #let mytest = [通过这次实验，我深刻体会到了同态加密技术的强大和实用性，特别是在保护数据隐私的同时执行复杂计算的能力。使用Microsoft SEAL库进行加密计算不仅加深了我对同态加密原理的理解，也提升了我的编程技能和解决实际问题的能力。]
@@ -205,6 +205,7 @@ pub fn main() {
 
 == *测试showybox*
 // First showybox
+①
 #showybox(
   frame: (border-color: red.darken(50%), title-color: red.lighten(60%), body-color: red.lighten(80%)),
   title-style: (color: black, weight: "regular", align: center),
@@ -215,6 +216,7 @@ pub fn main() {
 )
 
 // Second showybox
+②
 #showybox(
   title-style: (
     boxed-style: (anchor: (x: center, y: horizon), radius: (top-left: 10pt, bottom-right: 10pt, rest: 0pt)),
@@ -231,7 +233,7 @@ pub fn main() {
     size: 10pt,
     weight: 600,
     emph("This will be useful every
-                                                          time you want to interchange partial derivatives in the future."),
+                                                              time you want to interchange partial derivatives in the future."),
   ),
 )[
   Let $f: A arrow RR$ with $A subset RR^n$ an open set such that its cross derivatives of any order exist and are
@@ -242,6 +244,7 @@ pub fn main() {
   $
 ]
 
+③
 #showybox(
   frame: (border-color: blue.darken(50%), title-color: blue.lighten(80%), body-color: white),
   title-style: (color: black, weight: "regular", align: center),
@@ -254,6 +257,7 @@ pub fn main() {
   ],
 )
 
+④
 #showybox(
   footer-style: (sep-thickness: 0pt, align: right, color: black),
   title: "Divergence theorem",
@@ -270,6 +274,7 @@ pub fn main() {
   $
 ]
 
+⑤
 #showybox(
   title: "Parent container",
   lorem(10),
@@ -280,6 +285,7 @@ pub fn main() {
   ],
 )
 
+⑥
 #showybox(
   title-style: (
     boxed-style: (anchor: (x: center, y: horizon), radius: (top-left: 10pt, bottom-right: 10pt, rest: 0pt)),
@@ -293,16 +299,15 @@ pub fn main() {
   ),
   title: "mytitle",
   lorem(10),
-  grid(columns: 2, align: center)[
-    #showybox(title-style: (boxed-style: (:)), title: "Child 1", lorem(10))
-    #showybox(title-style: (boxed-style: (:)), title: "Child 2", lorem(10))
-    #showybox(title-style: (boxed-style: (:)), title: "Child 2", lorem(10))
-    #showybox(title-style: (boxed-style: (:)), title: "Child 2", lorem(10))
-    #showybox(title-style: (boxed-style: (:)), title: "Child 2", lorem(10))
-    #showybox(title-style: (boxed-style: (:)), title: "Child 2", lorem(10))
-  ],
+  showybox(title-style: (boxed-style: (:)), title: "Child 1", lorem(10)),
+  showybox(title-style: (boxed-style: (:)), title: "Child 2", lorem(10)),
+  showybox(title-style: (boxed-style: (:)), title: "Child 2", lorem(10)),
+  showybox(title-style: (boxed-style: (:)), title: "Child 2", lorem(10)),
+  showybox(title-style: (boxed-style: (:)), title: "Child 2", lorem(10)),
+  showybox(title-style: (boxed-style: (:)), title: "Child 2", lorem(10)),
 )
 
+⑦
 #showybox(
   title-style: (
     boxed-style: (anchor: (x: center, y: horizon), radius: (top-left: 10pt, bottom-right: 10pt, rest: 0pt)),
@@ -317,7 +322,7 @@ pub fn main() {
   title: "mytitle",
   lorem(10),
   columns(2, gutter: 2em)[
-    #set text(size: 8.5pt)
+    #set text(size: 9.5pt)
     #showybox(title-style: (boxed-style: (:)), title: lorem(3), lorem(10))
     #showybox(title-style: (boxed-style: (:)), title: lorem(3), lorem(10))
     #showybox(title-style: (boxed-style: (:)), title: lorem(3), lorem(10))
@@ -464,7 +469,7 @@ pub fn main() {
         none
       },
     ))
-    
+    cstyle(center, center, center)
     th[Header 1][Header 2][Header 3]
     tr[How][I][want]
     tr[a][drink,][alcoholic]
@@ -630,13 +635,16 @@ $
 #margin-note[When notes are about to overlap, they're automatically shifted]
 #margin-note(stroke: aqua + 3pt)[To avoid collision]
 #lorem(25)
-#margin-note(stroke: green, side: left)[You can provide two positional arguments if you want to highlight a phrase associated with your note.][The first is text which should be inline-noted, and the second is the standard margin note.]
+#margin-note(
+  stroke: green,
+  side: left,
+)[You can provide two positional arguments if you want to highlight a phrase associated with your note.][The first is text which should be inline-noted, and the second is the standard margin note.]
 
 #let caution-rect = rect.with(inset: 1em, radius: 0.5em, fill: orange.lighten(80%))
 #inline-note(rect: caution-rect)[
   Be aware that `typst` will complain when 4 notes overlap, and stop automatically avoiding collisions when 5 or more notes
   overlap. This is because the compiler stops attempting to reposition notes after a few attempts
   (initial layout + adjustment for each note).
-
+  
   You can manually adjust the position of notes with `dy` to silence the warning.
 ]
