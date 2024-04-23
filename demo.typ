@@ -32,7 +32,7 @@
   major: "土木工程",
   department: "火星土木学院",
   date: (2077, 1, 1),
-  show_content_figure: false,
+  show_content_figure: true,
 )
 
 #let mytest = [通过这次实验，我深刻体会到了同态加密技术的强大和实用性，特别是在保护数据隐私的同时执行复杂计算的能力。使用Microsoft SEAL库进行加密计算不仅加深了我对同态加密原理的理解，也提升了我的编程技能和解决实际问题的能力。]
