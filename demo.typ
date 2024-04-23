@@ -1,7 +1,9 @@
 #import "template.typ": *
+#import "@preview/treet:0.1.1": *
+#import "@preview/cheq:0.1.0": checklist
 #import "@preview/tablex:0.0.8": tablex, rowspanx, colspanx
 #import "@preview/cetz:0.2.2"
-#import "@preview/pinit:0.1.3": *
+#import "@preview/pinit:0.1.4": *
 #import "@preview/colorful-boxes:1.3.1": *
 #import "@preview/showybox:2.0.1": *
 #import "@preview/conchord:0.2.0": *
@@ -12,7 +14,8 @@
 #import "@preview/chromo:0.1.0": square-printer-test, gradient-printer-test, circular-printer-test, crosshair-printer-test
 #import "@preview/riesketcher:0.2.0": riesketcher
 #import "@preview/syntree:0.2.0": syntree
-#import "@preview/mitex:0.2.2": *
+#import "@preview/physica:0.9.3": *
+#import "@preview/mitex:0.2.3": *
 #import "@preview/easytable:0.1.0": easytable, elem
 #import elem: *
 #import "@preview/algo:0.3.3": algo, i, d, comment, code
@@ -52,6 +55,9 @@ void MergeSort(int arr[], int left, int right) {
 ```
 
 = 一级标题
+#text(size: 15pt)[
+  整理了在实验报告可能用到的任何元素，包括图表(及其编号)，树状图，代码块，数学公式，高亮，样式内容块等。
+]\
 #lorem(20) \
 测试中文:\
 #indent() _#mytest _
@@ -60,12 +66,49 @@ void MergeSort(int arr[], int left, int right) {
 #lorem(20)
 #figure(image("./img/NKU-logo.png", width: 10%), caption: "南开大学校徽")
 
+树状图：\
+#tree-list[
+  - 1
+    - 1.1
+      - 1.1.1
+    - 1.2
+      - 1.2.1
+      - 1.2.2
+        - 1.2.2.1
+  - 2
+  - 3
+    - 3.1
+      - 3.1.1
+    - 3.2
+]
+
+#[
+  #show: checklist
+  - [ ] Mercury
+  - [x] Mars
+  - [ ] Jupiter
+]
+
 分点：
 + _#lorem(10) _
 + _#lorem(10) _
 
 - _#lorem(10) _
 - _#lorem(10) _
+
+pintora：
+```pintora
+mindmap
+@param layoutDirection TB
++ UML Diagrams
+++ Behavior Diagrams
++++ Sequence Diagram
++++ State Diagram
++++ Activity Diagram
+++ Structural Diagrams
++++ Class Diagram
++++ Component Diagram
+```
 
 == *测试tablex*
 #figure(
@@ -333,10 +376,6 @@ pub fn main() {
 
 #let chord = new-chordgen()
 
-#box(chord("x32010", name: "C"))
-#box(chord("x33222", name: "F#m/C#"))
-#box(chord("x,9,7,8,9,9"))
-
 // https://xkcd.com/1195/
 == *测试fletcher*
 #import fletcher.shapes: diamond
@@ -446,9 +485,43 @@ pub fn main() {
   syntree(
     nonterminal: (fill: blue),
     terminal: (style: "italic"),
-    "[S [NP [Det the] [Nom [Adj little] [N bear]]] [VP [VP [V saw] [NP [Det the] [Nom [Adj fine] [Adj fat] [N trout]]]] [PP [P in] [^NP the brook]]]]",
+    "[S [NP [Det the] [Nom [Adj little] [N bear]]] [VP [VP [V saw] [NP [Det the] [Nom [Adj] [Adj] [N ]]]] [PP [P in] [^NP the brook]]]]",
   ),
 )
+
+== *测试physica*
+$
+A^T, curl vb(E) = - pdv(vb(B), t),
+quad
+tensor(Lambda,+mu,-nu) = dmat(1,RR),
+quad
+f(x,y) dd(x,y),
+quad
+dd(vb(x),y,[3]),
+quad
+dd(x,y,2,d:Delta,p:and),
+quad
+dv(phi,t,d:upright(D)) = pdv(phi,t) + vb(u) grad phi \
+
+H(f) = hmat(f;x,y;delim:"[",big:#true),
+quad
+vb(v^a) = sum_(i=1)^n alpha_i vu(u^i),
+quad
+Set((x, y), pdv(f,x,y,[2,1]) + pdv(f,x,y,[1,2]) < epsilon) \
+
+-1/c^2 pdv(,t,2)psi + laplacian psi = (m^2c^2) / hbar^2 psi,
+quad
+ket(n^((1))) = sum_(k in.not D) mel(k^((0)), V, n^((0))) / (E_n^((0)) - E_k^((0))) ket(k^((0))),
+quad
+integral_V dd(V) (pdv(cal(L), phi) - diff_mu (pdv(cal(L), (diff_mu phi)))) = 0 \
+
+dd(s,2) = -(1-(2G M)/r) dd(t,2) + (1-(2G M)/r)^(-1) dd(r,2) + r^2 dd(Omega,2)
+$
+
+$
+"clk:" & signals("|1....|0....|1....|0....|1....|0....|1....|0..", step: #0.5em) \
+"bus:" & signals(" #.... X=... ..... ..... X=... ..... ..... X#.", step: #0.5em)
+$
 
 == *测试mitex*
 #mitex(`

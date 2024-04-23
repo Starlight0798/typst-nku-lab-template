@@ -1,6 +1,7 @@
 #import "@preview/chic-hdr:0.4.0": *
 #import "@preview/codly:0.2.0": *
 #import "@preview/i-figured:0.2.4"
+#import "@preview/pintorita:0.1.1"
 
 #let Heiti = ("Times New Roman", "Heiti SC", "Heiti TC", "SimHei")
 #let Songti = ("Times New Roman", "Songti SC", "Songti TC", "SimSun")
@@ -199,11 +200,13 @@
     }
     #h(0.75em)
     #it.body
+    #v(5pt)
   ]
   
   // 代码段设置
   show: codly-init.with()
   codly(display-icon: false, stroke-color: luma(200), zebra-color: luma(240), enable-numbers: true, breakable: true)
+  show raw.where(lang: "pintora"): it => pintorita.render(it.text)
   
   body
 } 
