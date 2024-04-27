@@ -19,7 +19,7 @@ _这是一份用于NKU实验报告的typst模板，涵盖封面，目录，标�
 
 ### 使用方法
 
-​	建议使用`vscode` + `tinymist`插件 + `typst preview`插件编写，使用模板如下：
+​	使用模板方法如下：
 
 1. 创建你的typst文件，比如main.typ
 
@@ -29,6 +29,7 @@ _这是一份用于NKU实验报告的typst模板，涵盖封面，目录，标�
 
 	```javascript
 	#import "template.typ": *
+	#import XXX   // 这里引入你需要使用的其他包，参照demo.typ
 	
 	#show: project.with(
 	  course: "计算机网络",
@@ -38,7 +39,7 @@ _这是一份用于NKU实验报告的typst模板，涵盖封面，目录，标�
 	  major: "土木工程",
 	  department: "火星土木学院",
 	  date: (2077, 1, 1),
-	  show_content_figure: false	//是否在目录页加上图表的索引
+	  show_content_figure: True	//是否在目录页加上图表的索引
 	)
 	```
 
@@ -46,7 +47,43 @@ _这是一份用于NKU实验报告的typst模板，涵盖封面，目录，标�
 
 另外，实验报告可能需要用到不同样式的表格，图片，流程图，代码块等，这些详见`demo.typ.`，里面都有使用示例，基本都是调用各个库来完成效果，避免重复造轮子。
 
-**声明**：**模板使用的代码一部分借鉴了开源模板，在此感谢分享模板的前辈们！**
+
+
+### 编写
+
+建议使用`vscode` + `tinymist`插件 + `typst preview`插件编写，preview插件可以让你编写的过程达到**实时同步**的效果(**编译速度优于Latex**)，tinymist插件有诸多使用特性，不多赘述。
+
+![image-20240427141053306](assets/image-20240427141053306.png)
+
+#### 示例
+
+*<u>此部分针对不熟悉typst的用户，熟悉者可以跳过。</u>*
+
+比如你想要画像demo.typ里面的这样一个**丰富内容块**：
+
+<img src="assets/image-20240427141309450.png" alt="image-20240427141309450" style="zoom: 80%;" />
+
+那么首先需要在你的main.typ中顶部引入包，具体是哪个包，我在demo中二级标题都有注明：
+
+```js
+#import "@preview/colorful-boxes:1.3.1": *
+```
+
+然后在你需要放置的部分加入以下代码：
+
+```typescript
+#colorbox(title: [这是一段测试标题], color: "blue")[
+  这是一段测试文字这是一段测试文字这是一段测试文字这是一段测试文字这是一段测试文字
+]
+```
+
+效果如下，当然color可以自己调：
+
+<img src="assets/image-20240427141525685.png" alt="image-20240427141525685" style="zoom: 80%;" />
+
+其余任何组件同理。
+
+**(注：codly，pintorita我在模板文件已经引入，无需再次引入)**
 
 ------
 
