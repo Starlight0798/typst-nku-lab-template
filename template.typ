@@ -1,5 +1,5 @@
 #import "@preview/chic-hdr:0.4.0": *
-#import "@preview/codly:0.2.0": *
+#import "@preview/codly:0.2.1": *
 #import "@preview/i-figured:0.2.4"
 #import "@preview/pintorita:0.1.1"
 
@@ -203,11 +203,17 @@
     #it.body
     #v(5pt)
   ]
-  show link : underline
+  show link: underline
 
   // 代码段设置
   show: codly-init.with()
-  codly(display-icon: false, stroke-color: luma(200), zebra-color: luma(240), enable-numbers: true, breakable: true)
+  codly(
+    display-icon: false,
+    stroke-color: luma(200),
+    zebra-color: luma(240),
+    enable-numbers: true,
+    breakable: true,
+  )
   show raw.where(lang: "pintora"): it => pintorita.render(it.text)
 
   body
