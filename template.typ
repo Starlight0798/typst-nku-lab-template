@@ -2,6 +2,9 @@
 #import "@preview/codly:0.2.1": *
 #import "@preview/i-figured:0.2.4"
 #import "@preview/pintorita:0.1.1"
+#import "@preview/gentle-clues:0.8.0": *
+#import "@preview/cheq:0.1.0": checklist
+#import "@preview/unify:0.5.0": num,qty,numrange,qtyrange
 
 #let Heiti = ("Times New Roman", "Heiti SC", "Heiti TC", "SimHei")
 #let Songti = ("Times New Roman", "Songti SC", "Songti TC", "SimSun")
@@ -204,7 +207,17 @@
     #it.body
     #v(5pt)
   ]
-  show link: underline
+  show link: underline      // 链接
+  show: gentle-clues.with(    // gentle块
+    headless: false, // never show any headers
+    breakable: true, // default breaking behavior
+    header-inset: 0.4em, // default header-inset
+    content-inset: 1em, // default content-inset
+    stroke-width: 2pt, // default left stroke-width
+    border-radius: 2pt, // default border-radius
+    border-width: 0.5pt, // default boarder-width
+  )
+  show: checklist.with(fill: luma(95%), stroke: blue, radius: .2em)           // 复选框
 
   // 代码段设置
   show: codly-init.with()
