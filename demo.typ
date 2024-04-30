@@ -1,6 +1,5 @@
 #import "template.typ": *
 #import "@preview/treet:0.1.1": *
-#import "@preview/cheq:0.1.0": checklist
 #import "@preview/tablex:0.0.8": tablex, rowspanx, colspanx
 #import "@preview/cetz:0.2.2"
 #import "@preview/pinit:0.1.4": *
@@ -8,10 +7,8 @@
 #import "@preview/showybox:2.0.1": *
 #import "@preview/conchord:0.2.0": *
 #import "@preview/fletcher:0.4.3" as fletcher: node, edge
-#import "@preview/gentle-clues:0.7.1": *
-#import "@preview/badgery:0.1.1": ui-action, menu, badge-gray, badge-red, badge-yellow, badge-green, badge-blue, badge-purple
+#import "@preview/badgery:0.1.1": *
 #import "@preview/chic-hdr:0.4.0": *
-#import "@preview/chromo:0.1.0": square-printer-test, gradient-printer-test, circular-printer-test, crosshair-printer-test
 #import "@preview/riesketcher:0.2.0": riesketcher
 #import "@preview/syntree:0.2.0": syntree
 #import "@preview/physica:0.9.3": *
@@ -19,7 +16,6 @@
 #import "@preview/easytable:0.1.0": easytable, elem
 #import elem: *
 #import "@preview/algo:0.3.3": algo, i, d, comment, code
-#import "@preview/ctheorems:1.1.2": *
 #import "@preview/diagraph:0.2.1": *
 #import "@preview/xarrow:0.3.0": xarrow, xarrowSquiggly, xarrowTwoHead
 #import "@preview/drafting:0.2.0": *
@@ -56,7 +52,7 @@ void MergeSort(int arr[], int left, int right) {
 
 = 一级标题
 #text(size: 15pt)[
-  整理了在实验报告可能用到的任何元素，包括图表(及其编号)，树状图，代码块，数学公式，高亮，样式内容块等。
+  整理了在实验报告可能用到的任何元素，*包括图表(及其编号)，树状图，代码块，数学公式，高亮，样式内容块*等。
 ]\
 #lorem(20) \
 测试中文:\
@@ -82,12 +78,32 @@ void MergeSort(int arr[], int left, int right) {
     - 3.2
 ]
 
-#[
-  #show: checklist
-  - [ ] Mercury
-  - [x] Mars
-  - [ ] Jupiter
-]
+#text(red, tree-list(
+  marker: text(blue)[├── ],
+  last-marker: text(aqua)[└── ],
+  indent: text(teal)[│#h(1.5em)],
+  empty-indent: h(2em),
+)[
+  - 1
+    - 1.1
+      - 1.1.1
+    - 1.2
+      - 1.2.1
+      - 1.2.2
+        - 1.2.2.1
+  - 2
+  - 3
+    - 3.1
+      - 3.1.1
+    - 3.2
+])
+
+== 测试cheq
+
+- [ ] Mercury
+- [x] Mars
+- [ ] Jupiter
+- [x] Sun
 
 分点：
 + _#lorem(10) _
@@ -96,7 +112,7 @@ void MergeSort(int arr[], int left, int right) {
 - _#lorem(10) _
 - _#lorem(10) _
 
-pintora：
+== 测试pintora
 ```pintora
 mindmap
 @param layoutDirection TB
@@ -201,9 +217,9 @@ pub fn main() {
   cetz.canvas({
     import cetz.chart
     import cetz.draw: *
-    
+
     let colors = gradient.linear(red, blue, green, yellow)
-    
+
     chart.piechart(
       data,
       value-key: 1,
@@ -222,7 +238,7 @@ pub fn main() {
 
 #text(size: 16pt)[
   A simple #pin(1)highlighted text#pin(2).
-  
+
 ]
 #pinit-highlight(1, 2)
 #pinit-point-from(2)[It is simple.]
@@ -234,7 +250,7 @@ pub fn main() {
   #lorem(30)
 ]
 
-#slanted-colorbox(title: lorem(5), color: "red")[
+#slanted-colorbox(title: lorem(5), color: "default")[
   #lorem(30)
 ]
 
@@ -250,7 +266,7 @@ pub fn main() {
 // First showybox
 ①
 #showybox(
-  frame: (border-color: red.darken(50%), title-color: red.lighten(60%), body-color: red.lighten(80%)),
+  frame: (border-color: red.darken(50%), title-color: red.lighten(70%), body-color: red.lighten(90%)),
   title-style: (color: black, weight: "regular", align: center),
   shadow: (offset: 3pt),
   title: "Red-ish showybox with separated sections!",
@@ -265,7 +281,7 @@ pub fn main() {
     boxed-style: (anchor: (x: center, y: horizon), radius: (top-left: 10pt, bottom-right: 10pt, rest: 0pt)),
   ),
   frame: (
-    title-color: blue.lighten(10%),
+    title-color: blue,
     body-color: white,
     footer-color: blue.lighten(80%),
     border-color: blue.darken(60%),
@@ -283,7 +299,7 @@ pub fn main() {
   continuous in $A$. Then for any point $(a_1, a_2, ..., a_n) in A$ it is true that
   $
   frac(diff^n f, diff x_i ... diff x_j)(a_1, a_2, ..., a_n) =
-    frac(diff^n f, diff x_j ... diff x_i)(a_1, a_2, ..., a_n)
+  frac(diff^n f, diff x_j ... diff x_i)(a_1, a_2, ..., a_n)
   $
 ]
 
@@ -313,7 +329,7 @@ pub fn main() {
   $V$, then:
   $
   integral.triple_V (bold(nabla) dot bold(F)) dif V = integral.surf_S
-    (bold(F) dot bold(hat(n))) dif S
+  (bold(F) dot bold(hat(n))) dif S
   $
 ]
 
@@ -444,13 +460,21 @@ pub fn main() {
 )
 
 == *测试gentle*
-// info clue 
+// info clue
 #info[ This is the info clue ... ]
 // or a tip
-#tip(title: "Best tip ever")[Check out this cool package]
+#tip(title: "这是一个测试标题")[Check out this cool package]
 #question[ This is the info clue ... ]
 #quote[ This is the info clue ... ]
 #example[ This is the info clue ... ]
+#abstract[ This is the info clue ... ]
+#task[ This is the info clue ... ]
+#error[ This is the info clue ... ]
+#warning[ This is the info clue ... ]
+#success[ This is the info clue ... ]
+#conclusion[ This is the info clue ... ]
+#memo[ This is the info clue ... ]
+#clue(title: none, icon: none, accent-color: orange)[We should run more tests!]
 
 == *测试badgery*
 #badge-gray("Gray badge")
@@ -463,17 +487,6 @@ pub fn main() {
 #menu("File", "New File...")
 #menu("Menu", "Sub-menu", "Sub-sub menu", "Action")
 
-== *测试chromo*
-#box(
-  height: 68pt,
-  columns(2, gutter: 11pt)[
-    #square-printer-test()
-    #gradient-printer-test()
-    #circular-printer-test()
-  ],
-)
-
-#pagebreak()
 == *测试riesketcher*
 #canvas({
   riesketcher(x => calc.pow(x, 3) + 4, method: "left", start: -3.1, end: 3.5, n: 10, plot-x-tick-step: 1)
@@ -502,20 +515,17 @@ quad
 dd(x,y,2,d:Delta,p:and),
 quad
 dv(phi,t,d:upright(D)) = pdv(phi,t) + vb(u) grad phi \
-
 H(f) = hmat(f;x,y;delim:"[",big:#true),
 quad
 vb(v^a) = sum_(i=1)^n alpha_i vu(u^i),
 quad
 Set((x, y), pdv(f,x,y,[2,1]) + pdv(f,x,y,[1,2]) < epsilon) \
-
--1/c^2 pdv(,t,2)psi + laplacian psi = (m^2c^2) / hbar^2 psi,
+-1 / c^2 pdv(,t,2)psi + laplacian psi = (m^2c^2) / hbar^2 psi,
 quad
 ket(n^((1))) = sum_(k in.not D) mel(k^((0)), V, n^((0))) / (E_n^((0)) - E_k^((0))) ket(k^((0))),
 quad
 integral_V dd(V) (pdv(cal(L), phi) - diff_mu (pdv(cal(L), (diff_mu phi)))) = 0 \
-
-dd(s,2) = -(1-(2G M)/r) dd(t,2) + (1-(2G M)/r)^(-1) dd(r,2) + r^2 dd(Omega,2)
+dd(s,2) = -(1-(2G M) / r) dd(t,2) + (1-(2G M) / r)^(-1) dd(r,2) + r^2 dd(Omega,2)
 $
 
 $
@@ -530,6 +540,13 @@ $
     \f\hat\xi\,e^{2 π i ξ x}
     \,d\xi
 `)
+
+== *测试unify*
+
+$ num("-1.32865+-0.50273e-6") $
+$ qty("1.3+1.2-0.3e3", "erg/cm^2/s", space: "#h(2mm)") $
+$ numrange("1,1238e-2", "3,0868e5", thousandsep: "'") $
+$ qtyrange("1e3", "2e3", "meter per second squared", per: "/", delimiter: "\"to\"") $
 
 == *测试easytable*
 #figure(
@@ -565,16 +582,19 @@ $
   tr[involving][quantum ][mechanics.]
 })
 
-#easytable({
-  let tr = tr.with(trans: pad.with(x: 3pt))
-  
-  th[Header 1][Header 2][Header 3]
-  tr[How][I][want]
-  tr[a][drink,][alcoholic]
-  tr[of][course,][after]
-  tr[the][heavy][lectures]
-  tr[involving][quantum][mechanics.]
-})
+#figure(
+  caption: [表格示例],
+  easytable({
+    let tr = tr.with(trans: pad.with(x: 3pt))
+
+    th[Header 1][Header 2][Header 3]
+    tr[How][I][want]
+    tr[a][drink,][alcoholic]
+    tr[of][course,][after]
+    tr[the][heavy][lectures]
+    tr[involving][quantum][mechanics.]
+  }),
+)
 
 == *测试algo*
 #algo(
@@ -608,16 +628,6 @@ $
   return $x+y$
 ]
 
-#table(
-  columns: 2,
-  stroke: none,
-  align: (x, _) => (right, left).at(x),
-  "indent-guides:",
-  "1pt + black",
-  "main-text-styles:",
-  "(size: 15pt)",
-)
-
 #algo(title: "Floyd-Warshall", parameters: ("V", "E", "w"), indent-guides: 1pt + black, main-text-styles: (size: 15pt))[
   Let $"dist"[u,v] <- infinity$ for $u,v$ in $V$\
   For $(u,v)$ in $E$:#i\
@@ -633,47 +643,6 @@ $
   $"dist"[i,j] <- "dist"[i,k] + "dist"[k,j]$#d#d#d#d\
   \
   Return $"dist"$
-]
-
-== *测试theorems*
-#show: thmrules
-#let theorem = thmbox("theorem", "Theorem", fill: rgb("#eeffee"))
-#let corollary = thmplain("corollary", "Corollary", base: "theorem", titlefmt: strong)
-#let definition = thmbox("definition", "Definition", inset: (x: 1.2em, top: 1em))
-
-#let example = thmplain("example", "Example").with(numbering: none)
-#let proof = thmproof("proof", "Proof")
-#definition[
-  A natural number is called a #highlight[_prime number_] if it is greater than 1 and cannot be written as the product of
-  two smaller natural numbers.
-]
-#example[
-  The numbers $2$, $3$, and $17$ are prime. @cor_largest_prime shows that this list is not exhaustive!
-]
-
-#theorem("Euclid")[
-  There are infinitely many primes.
-]
-#proof[
-  Suppose to the contrary that $p_1, p_2, dots, p_n$ is a finite enumeration of all primes. Set $P = p_1 p_2 dots p_n$.
-  Since $P + 1$ is not in our list, it cannot be prime. Thus, some prime factor $p_j$ divides $P + 1$. Since
-  $p_j$ also divides $P$, it must divide the difference $(P + 1) - P = 1$, a contradiction.
-]
-
-#corollary[
-  There is no largest prime number.
-] <cor_largest_prime>
-#corollary[
-  There are infinitely many composite numbers.
-]
-
-#theorem[
-  There are arbitrarily long stretches of composite numbers.
-]
-#proof[
-  For any $n > 2$, consider $
-    n! + 2, quad n! + 3, quad ..., quad n! + n #qedhere
-  $
 ]
 
 == *测试diagraph*
@@ -695,8 +664,8 @@ $
 == *测试xarrow*
 $
 a xarrow(sym: <--, QQ\, 1 + 1^4) b \
-  c xarrowSquiggly("very long boi") d \
-  c / ( a xarrowTwoHead("NP" limits(sum)^*) b times 4)
+c xarrowSquiggly("very long boi") d \
+c / ( a xarrowTwoHead("NP" limits(sum)^*) b times 4)
 $
 
 == *测试drafting*
@@ -718,6 +687,6 @@ $
   Be aware that `typst` will complain when 4 notes overlap, and stop automatically avoiding collisions when 5 or more notes
   overlap. This is because the compiler stops attempting to reposition notes after a few attempts
   (initial layout + adjustment for each note).
-  
+
   You can manually adjust the position of notes with `dy` to silence the warning.
 ]
