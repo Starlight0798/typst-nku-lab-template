@@ -184,6 +184,7 @@
   set figure(supplement: [图])
   show heading: i-figured.reset-counters.with(level: 2)
   show figure: i-figured.show-figure.with(level: 2)
+  show math.equation: i-figured.show-equation
   set text(
     font: Songti,
     size: 12pt,

@@ -201,9 +201,9 @@ pub fn main() {
   cetz.canvas({
     import cetz.chart
     import cetz.draw: *
-    
+
     let colors = gradient.linear(red, blue, green, yellow)
-    
+
     chart.piechart(
       data,
       value-key: 1,
@@ -222,7 +222,7 @@ pub fn main() {
 
 #text(size: 16pt)[
   A simple #pin(1)highlighted text#pin(2).
-  
+
 ]
 #pinit-highlight(1, 2)
 #pinit-point-from(2)[It is simple.]
@@ -283,7 +283,7 @@ pub fn main() {
   continuous in $A$. Then for any point $(a_1, a_2, ..., a_n) in A$ it is true that
   $
   frac(diff^n f, diff x_i ... diff x_j)(a_1, a_2, ..., a_n) =
-    frac(diff^n f, diff x_j ... diff x_i)(a_1, a_2, ..., a_n)
+  frac(diff^n f, diff x_j ... diff x_i)(a_1, a_2, ..., a_n)
   $
 ]
 
@@ -313,7 +313,7 @@ pub fn main() {
   $V$, then:
   $
   integral.triple_V (bold(nabla) dot bold(F)) dif V = integral.surf_S
-    (bold(F) dot bold(hat(n))) dif S
+  (bold(F) dot bold(hat(n))) dif S
   $
 ]
 
@@ -444,7 +444,7 @@ pub fn main() {
 )
 
 == *测试gentle*
-// info clue 
+// info clue
 #info[ This is the info clue ... ]
 // or a tip
 #tip(title: "Best tip ever")[Check out this cool package]
@@ -502,20 +502,17 @@ quad
 dd(x,y,2,d:Delta,p:and),
 quad
 dv(phi,t,d:upright(D)) = pdv(phi,t) + vb(u) grad phi \
-
 H(f) = hmat(f;x,y;delim:"[",big:#true),
 quad
 vb(v^a) = sum_(i=1)^n alpha_i vu(u^i),
 quad
 Set((x, y), pdv(f,x,y,[2,1]) + pdv(f,x,y,[1,2]) < epsilon) \
-
--1/c^2 pdv(,t,2)psi + laplacian psi = (m^2c^2) / hbar^2 psi,
+-1 / c^2 pdv(,t,2)psi + laplacian psi = (m^2c^2) / hbar^2 psi,
 quad
 ket(n^((1))) = sum_(k in.not D) mel(k^((0)), V, n^((0))) / (E_n^((0)) - E_k^((0))) ket(k^((0))),
 quad
 integral_V dd(V) (pdv(cal(L), phi) - diff_mu (pdv(cal(L), (diff_mu phi)))) = 0 \
-
-dd(s,2) = -(1-(2G M)/r) dd(t,2) + (1-(2G M)/r)^(-1) dd(r,2) + r^2 dd(Omega,2)
+dd(s,2) = -(1-(2G M) / r) dd(t,2) + (1-(2G M) / r)^(-1) dd(r,2) + r^2 dd(Omega,2)
 $
 
 $
@@ -565,16 +562,19 @@ $
   tr[involving][quantum ][mechanics.]
 })
 
-#easytable({
-  let tr = tr.with(trans: pad.with(x: 3pt))
-  
-  th[Header 1][Header 2][Header 3]
-  tr[How][I][want]
-  tr[a][drink,][alcoholic]
-  tr[of][course,][after]
-  tr[the][heavy][lectures]
-  tr[involving][quantum][mechanics.]
-})
+#figure(
+  caption: [表格示例],
+  easytable({
+    let tr = tr.with(trans: pad.with(x: 3pt))
+
+    th[Header 1][Header 2][Header 3]
+    tr[How][I][want]
+    tr[a][drink,][alcoholic]
+    tr[of][course,][after]
+    tr[the][heavy][lectures]
+    tr[involving][quantum][mechanics.]
+  }),
+)
 
 == *测试algo*
 #algo(
@@ -695,8 +695,8 @@ $
 == *测试xarrow*
 $
 a xarrow(sym: <--, QQ\, 1 + 1^4) b \
-  c xarrowSquiggly("very long boi") d \
-  c / ( a xarrowTwoHead("NP" limits(sum)^*) b times 4)
+c xarrowSquiggly("very long boi") d \
+c / ( a xarrowTwoHead("NP" limits(sum)^*) b times 4)
 $
 
 == *测试drafting*
@@ -718,6 +718,6 @@ $
   Be aware that `typst` will complain when 4 notes overlap, and stop automatically avoiding collisions when 5 or more notes
   overlap. This is because the compiler stops attempting to reposition notes after a few attempts
   (initial layout + adjustment for each note).
-  
+
   You can manually adjust the position of notes with `dy` to silence the warning.
 ]
