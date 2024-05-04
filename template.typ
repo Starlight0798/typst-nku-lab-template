@@ -102,9 +102,10 @@
     title: text(font: Xbs, size: 16pt)[目录],
     indent: auto,
   )
-  v(0.2em)
   if show_content_figure {
-    i-figured.outline(title: text(font: Xbs, size: 16pt)[图表])
+    text(font: Xbs, size: 10pt)[
+      #i-figured.outline(title: [图表])
+    ]
   }
   pagebreak()
 
@@ -159,7 +160,7 @@
     #v(5pt)
   ]
   show link: it => {          // 链接
-    set text(fill: blue.darken(0%))
+    set text(fill: blue.darken(20%))
     it
   }
   show: gentle-clues.with(    // gentle块
