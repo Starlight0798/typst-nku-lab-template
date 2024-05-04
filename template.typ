@@ -4,7 +4,7 @@
 #import "@preview/pintorita:0.1.1"
 #import "@preview/gentle-clues:0.8.0": *
 #import "@preview/cheq:0.1.0": checklist
-#import "@preview/unify:0.5.0": num,qty,numrange,qtyrange
+#import "@preview/unify:0.5.0": num, qty, numrange, qtyrange
 
 #let Heiti = ("Times New Roman", "Heiti SC", "Heiti TC", "SimHei")
 #let Songti = ("Times New Roman", "Songti SC", "Songti TC", "SimSun")
@@ -26,64 +26,6 @@
     stroke: (bottom: 1pt + black),
     text(font: Zhongsong, size: 16pt, bottom-edge: "descender")[ #body ],
   )
-}
-
-#let chinese_outline() = {
-  v(-2em)
-  align(center)[
-    #text(font: Xbs, size: 18pt, "目　　录")
-  ]
-
-  set text(
-    font: Xbs,
-    size: 12pt,
-  )
-  // 临时取消目录的首行缩进
-  set par(
-    leading: 1.24em,
-    first-line-indent: 0pt,
-  )
-  locate(loc => {
-    let elements = query(heading.where(outlined: true), loc)
-    for el in elements {
-      // 是否有 el 位于前面，前面的目录中用拉丁数字，后面的用阿拉伯数字
-      let before_toc = query(heading.where(outlined: true).before(loc), loc).find(one => {
-        one.body == el.body
-      }) != none
-      let page_num = if before_toc {
-        numbering("I", counter(page).at(el.location()).first())
-      } else {
-        counter(page).at(el.location()).first()
-      }
-
-      link(el.location())[#{
-          // acknoledgement has no numbering
-          let chapt_num = if el.numbering != none {
-            numbering(el.numbering, ..counter(heading).at(el.location()))
-          } else {
-            none
-          }
-
-          if el.level == 1 {
-            set text(weight: "black")
-            if chapt_num == none { } else {
-              chapt_num
-              "　　"
-            }
-            el.body
-          } else {
-            chapt_num
-            "　"
-            el.body
-          }
-        }]
-
-      // 填充 ......
-      box(width: 1fr, h(0.5em) + box(width: 1fr, repeat[.]) + h(0.5em))
-      [#page_num]
-      linebreak()
-    }
-  })
 }
 
 #let project(
@@ -145,16 +87,24 @@
   pagebreak()
 
   // 目录
-  chinese_outline()
-  v(0.5em)
+  show outline.entry.where(level: 1): it => {
+    v(12pt, weak: true)
+    strong(it)
+  }
+  show outline.entry: it => {
+    set text(
+      font: Xbs,
+      size: 12pt,
+    )
+    it
+  }
+  outline(
+    title: text(font: Xbs, size: 16pt)[目录],
+    indent: auto,
+  )
+  v(0.2em)
   if show_content_figure {
-    text(font: Xbs, size: 10pt)[
-      #set par(
-        justify: true,
-        leading: 1.0em,
-      )
-      #i-figured.outline(title: [图表])
-    ]
+    i-figured.outline(title: text(font: Xbs, size: 16pt)[图表])
   }
   pagebreak()
 
@@ -192,12 +142,13 @@
     font: Songti,
     size: 12pt,
   )
-  set par(
-    justify: true,
+  set par(    // 段落设置
+    justify: false,
     leading: 1.04em,
     first-line-indent: 2em,
+    linebreaks: "optimized",
   )
-  show heading: it => box(width: 100%)[
+  show heading: it => box(width: 100%)[ // 标题设置
     #v(0.45em)
     #set text(font: Xbs)
     #if it.numbering != none {
@@ -207,7 +158,10 @@
     #it.body
     #v(5pt)
   ]
-  show link: underline      // 链接
+  show link: it => {          // 链接
+    set text(fill: blue.darken(0%))
+    it
+  }
   show: gentle-clues.with(    // gentle块
     headless: false, // never show any headers
     breakable: true, // default breaking behavior
@@ -217,7 +171,7 @@
     border-radius: 2pt, // default border-radius
     border-width: 0.5pt, // default boarder-width
   )
-  show: checklist.with(fill: luma(95%), stroke: blue, radius: .2em)           // 复选框
+  show: checklist.with(fill: luma(95%), stroke: blue, radius: .2em)   // 复选框
 
   // 代码段设置
   show: codly-init.with()
