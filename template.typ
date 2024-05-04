@@ -159,7 +159,7 @@
     #v(5pt)
   ]
   show link: it => {          // 链接
-    set text(fill: blue.darken(0%))
+    set text(fill: blue.darken(20%))
     it
   }
   show: gentle-clues.with(    // gentle块
