@@ -6,7 +6,7 @@
 #import "@preview/colorful-boxes:1.3.1": *
 #import "@preview/showybox:2.0.1": *
 #import "@preview/conchord:0.2.0": *
-#import "@preview/fletcher:0.4.3" as fletcher: node, edge
+#import "@preview/fletcher:0.4.4" as fletcher: node, edge
 #import "@preview/badgery:0.1.1": *
 #import "@preview/chic-hdr:0.4.0": *
 #import "@preview/riesketcher:0.2.0": riesketcher
