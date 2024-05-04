@@ -102,9 +102,10 @@
     title: text(font: Xbs, size: 16pt)[目录],
     indent: auto,
   )
-  v(0.2em)
   if show_content_figure {
-    i-figured.outline(title: text(font: Xbs, size: 16pt)[图表])
+    text(font: Xbs, size: 10pt)[
+      #i-figured.outline(title: [图表])
+    ]
   }
   pagebreak()
 
