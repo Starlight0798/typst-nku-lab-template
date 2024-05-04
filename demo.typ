@@ -6,7 +6,7 @@
 #import "@preview/colorful-boxes:1.3.1": *
 #import "@preview/showybox:2.0.1": *
 #import "@preview/conchord:0.2.0": *
-#import "@preview/fletcher:0.4.3" as fletcher: node, edge
+#import "@preview/fletcher:0.4.4" as fletcher: node, edge
 #import "@preview/badgery:0.1.1": *
 #import "@preview/chic-hdr:0.4.0": *
 #import "@preview/riesketcher:0.2.0": riesketcher
@@ -18,7 +18,6 @@
 #import "@preview/algo:0.3.3": algo, i, d, comment, code
 #import "@preview/diagraph:0.2.1": *
 #import "@preview/xarrow:0.3.0": xarrow, xarrowSquiggly, xarrowTwoHead
-#import "@preview/drafting:0.2.0": *
 
 #show: project.with(
   course: "计算机网络",
@@ -58,7 +57,28 @@ void MergeSort(int arr[], int left, int right) {
 测试中文:\
 #indent() _#mytest _
 
+分点：
++ _#lorem(10) _
++ _#lorem(10) _
+
+- _#lorem(10) _
+- _#lorem(10) _
+- test#footnote[测试脚注]
+
+terms:
+/ Fact: If a term list has a lot
+  of text, and maybe other inline
+  content.
+
+/ Tip: To make it wide, simply
+  insert a blank line between the
+  items.
+
+#link(<mylink>)[点击跳转链接] \
+_这是一个被强调的内容_ \
+This is #highlight(fill: blue.lighten(50%), radius: 10pt)[with blue]
 == 二级标题
+
 #lorem(20)
 #figure(image("./img/NKU-logo.png", width: 10%), caption: "南开大学校徽")
 
@@ -76,7 +96,7 @@ void MergeSort(int arr[], int left, int right) {
     - 3.1
       - 3.1.1
     - 3.2
-]
+] <mylink>
 
 #text(red, tree-list(
   marker: text(blue)[├── ],
@@ -105,13 +125,6 @@ void MergeSort(int arr[], int left, int right) {
 - [ ] Jupiter
 - [x] Sun
 
-分点：
-+ _#lorem(10) _
-+ _#lorem(10) _
-
-- _#lorem(10) _
-- _#lorem(10) _
-
 == 测试pintora
 ```pintora
 mindmap
@@ -126,7 +139,7 @@ mindmap
 +++ Component Diagram
 ```
 
-== *测试tablex*
+== 测试tablex
 #figure(
   supplement: [表],
   caption: "一个表格",
@@ -190,7 +203,7 @@ mindmap
 ),
 )
 
-== *测试codly*
+== 测试codly
 ```rust
 pub fn main() {
     println!("Hello, world!");
@@ -198,7 +211,7 @@ pub fn main() {
 ```
 #mycode
 
-== *测试cetz*
+== 测试cetz
 #let data = (
   ([Belgium], 24),
   ([Germany], 31),
@@ -234,7 +247,7 @@ pub fn main() {
   }),
 )
 
-== *测试pinit*
+== 测试pinit
 
 #text(size: 16pt)[
   A simple #pin(1)highlighted text#pin(2).
@@ -245,7 +258,7 @@ pub fn main() {
 
 #pagebreak()
 
-== *测试colorbox*
+== 测试colorbox
 #colorbox(title: lorem(5), color: "blue")[
   #lorem(30)
 ]
@@ -262,7 +275,7 @@ pub fn main() {
   #lorem(50)
 ]
 
-== *测试showybox*
+== 测试showybox
 // First showybox
 ①
 #showybox(
@@ -393,7 +406,7 @@ pub fn main() {
 #let chord = new-chordgen()
 
 // https://xkcd.com/1195/
-== *测试fletcher*
+== 测试fletcher
 #import fletcher.shapes: diamond
 #fletcher.diagram(
   node-stroke: 1pt,
@@ -459,7 +472,7 @@ pub fn main() {
   blob((2, 2), [Feed\ Forward], tint: blue),
 )
 
-== *测试gentle*
+== 测试gentle
 // info clue
 #info[ This is the info clue ... ]
 // or a tip
@@ -476,7 +489,7 @@ pub fn main() {
 #memo[ This is the info clue ... ]
 #clue(title: none, icon: none, accent-color: orange)[We should run more tests!]
 
-== *测试badgery*
+== 测试badgery
 #badge-gray("Gray badge")
 #badge-red("Red badge")
 #badge-yellow("Yellow badge") \
@@ -487,12 +500,12 @@ pub fn main() {
 #menu("File", "New File...")
 #menu("Menu", "Sub-menu", "Sub-sub menu", "Action")
 
-== *测试riesketcher*
+== 测试riesketcher
 #canvas({
   riesketcher(x => calc.pow(x, 3) + 4, method: "left", start: -3.1, end: 3.5, n: 10, plot-x-tick-step: 1)
 })
 
-== *测试syntree*
+== 测试syntree
 #figure(
   caption: "Example of a syntax tree.",
   syntree(
@@ -502,7 +515,7 @@ pub fn main() {
   ),
 )
 
-== *测试physica*
+== 测试physica
 $
 A^T, curl vb(E) = - pdv(vb(B), t),
 quad
@@ -533,7 +546,7 @@ $
 "bus:" & signals(" #.... X=... ..... ..... X=... ..... ..... X#.", step: #0.5em)
 $
 
-== *测试mitex*
+== 测试mitex
 #mitex(`
   \newcommand{\f}[2]{#1f(#2)}
   \f\relax{x} = \int_{-\infty}^\infty
@@ -541,14 +554,14 @@ $
     \,d\xi
 `)
 
-== *测试unify*
+== 测试unify
 
 $ num("-1.32865+-0.50273e-6") $
 $ qty("1.3+1.2-0.3e3", "erg/cm^2/s", space: "#h(2mm)") $
 $ numrange("1,1238e-2", "3,0868e5", thousandsep: "'") $
 $ qtyrange("1e3", "2e3", "meter per second squared", per: "/", delimiter: "\"to\"") $
 
-== *测试easytable*
+== 测试easytable
 #figure(
   easytable({
     let th = th.with(trans: emph)
@@ -596,7 +609,7 @@ $ qtyrange("1e3", "2e3", "meter per second squared", per: "/", delimiter: "\"to\
   }),
 )
 
-== *测试algo*
+== 测试algo
 #algo(
   title: [ // note that title and parameters
     #set text(size: 15pt) // can be content
@@ -645,7 +658,7 @@ $ qtyrange("1e3", "2e3", "meter per second squared", per: "/", delimiter: "\"to\
   Return $"dist"$
 ]
 
-== *测试diagraph*
+== 测试diagraph
 #raw-render(
   ```
   digraph {
@@ -661,32 +674,14 @@ $ qtyrange("1e3", "2e3", "meter per second squared", per: "/", delimiter: "\"to\
   width: 100%,
 )
 
-== *测试xarrow*
+== 测试xarrow
 $
 a xarrow(sym: <--, QQ\, 1 + 1^4) b \
 c xarrowSquiggly("very long boi") d \
 c / ( a xarrowTwoHead("NP" limits(sum)^*) b times 4)
 $
 
-== *测试drafting*
-
-#set-page-properties()
-#lorem(20)
-#margin-note(side: left)[Hello, world!]
-#lorem(10)
-#margin-note[When notes are about to overlap, they're automatically shifted]
-#margin-note(stroke: aqua + 3pt)[To avoid collision]
-#lorem(25)
-#margin-note(
-  stroke: green,
-  side: left,
-)[You can provide two positional arguments if you want to highlight a phrase associated with your note.][The first is text which should be inline-noted, and the second is the standard margin note.]
-
-#let caution-rect = rect.with(inset: 1em, radius: 0.5em, fill: orange.lighten(80%))
-#inline-note(rect: caution-rect)[
-  Be aware that `typst` will complain when 4 notes overlap, and stop automatically avoiding collisions when 5 or more notes
-  overlap. This is because the compiler stops attempting to reposition notes after a few attempts
-  (initial layout + adjustment for each note).
-
-  You can manually adjust the position of notes with `dy` to silence the warning.
-]
+测试参考文献：\
+文献1的内容@impagliazzo2001problems \
+文献2的内容@Burckhardt:2013
+#bibliography("works.bib", title: [参考文献])
