@@ -147,7 +147,6 @@
     justify: false,
     leading: 1.04em,
     first-line-indent: 2em,
-    linebreaks: "optimized",
   )
   show heading: it => box(width: 100%)[ // 标题设置
     #v(0.45em)
