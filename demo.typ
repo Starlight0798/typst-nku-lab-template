@@ -74,6 +74,11 @@ terms:
   insert a blank line between the
   items.
 
+#box(stroke: 3pt + gradient.conic(..color.map.magma), outset: 5pt)[测试文本] #h(2em)
+#box(stroke: 3pt + gradient.linear(..color.map.magma), outset: 5pt)[测试文本] #h(2em)
+#box(stroke: 3pt + gradient.radial(..color.map.crest), outset: 5pt)[测试文本] #h(2em)
+#box(stroke: 3pt + gradient.linear(..color.map.rainbow).sharp(8, smoothness: 20%), outset: 5pt)[测试文本] #h(2em)
+
 #link(<mylink>)[点击跳转链接] \
 _这是一个被强调的内容_ \
 This is #highlight(fill: blue.lighten(50%), radius: 10pt)[with blue]
