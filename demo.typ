@@ -28,6 +28,7 @@
   department: "火星土木学院",
   date: (2077, 1, 1),
   show_content_figure: true,
+  watermark: "NKU",
 )
 
 #let mytest = [通过这次实验，我深刻体会到了同态加密技术的强大和实用性，特别是在保护数据隐私的同时执行复杂计算的能力。使用Microsoft SEAL库进行加密计算不仅加深了我对同态加密原理的理解，也提升了我的编程技能和解决实际问题的能力。]
@@ -77,11 +78,20 @@ terms:
 #box(stroke: 3pt + gradient.conic(..color.map.magma), outset: 5pt)[测试文本] #h(2em)
 #box(stroke: 3pt + gradient.linear(..color.map.magma), outset: 5pt)[测试文本] #h(2em)
 #box(stroke: 3pt + gradient.radial(..color.map.crest), outset: 5pt)[测试文本] #h(2em)
-#box(stroke: 3pt + gradient.linear(..color.map.rainbow).sharp(8, smoothness: 20%), outset: 5pt)[测试文本] #h(2em)
+#box(stroke: 3pt + gradient.linear(..color.map.rainbow).sharp(8, smoothness: 20%), outset: 5pt)[测试文本] #h(2em) \
+
+#v(1em)
+
+#box(fill: blue.lighten(50%), radius: 10pt, outset: 5pt)[测试文本] #h(2em)
+#box(fill: red.lighten(50%), radius: 10pt, outset: 5pt)[测试文本] #h(2em)
+#box(fill: yellow.lighten(50%), radius: 10pt, outset: 5pt)[测试文本] #h(2em)
+
+#rect(fill: blue.lighten(50%), radius: 10pt)[测试文本]
+#rect(fill: red.lighten(50%), radius: 10pt)[测试文本]
 
 #link(<mylink>)[点击跳转链接] \
 _这是一个被强调的内容_ \
-This is #highlight(fill: blue.lighten(50%), radius: 10pt)[with blue]
+
 == 二级标题
 
 #lorem(20)

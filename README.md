@@ -29,7 +29,7 @@ _这是一份用于NKU实验报告的typst模板，涵盖封面，目录，标�
 
 	```javascript
 	#import "template.typ": *
-	#import XXX   // 这里引入你需要使用的其他包，参照demo.typ
+	#import XXX  // 这里引入你需要使用的其他包(若干)，参照demo.typ
 	
 	#show: project.with(
 	  course: "计算机网络",
@@ -39,7 +39,8 @@ _这是一份用于NKU实验报告的typst模板，涵盖封面，目录，标�
 	  major: "土木工程",
 	  department: "火星土木学院",
 	  date: (2077, 1, 1),
-	  show_content_figure: True	//是否在目录页加上图表的索引
+	  show_content_figure: True			// 是否在目录页加上图表的索引
+	  watermark: "NKU",  				// 水印，不写或写空字符串则无水印
 	)
 	```
 
@@ -76,6 +77,8 @@ _这是一份用于NKU实验报告的typst模板，涵盖封面，目录，标�
   这是一段测试文字这是一段测试文字这是一段测试文字这是一段测试文字这是一段测试文字
 ]
 ```
+
+> 如果你找不到代码，建议使用`typst preview`进行实时预览，这样你直接点击你想要的组件，就会自动跳转到对应的代码。
 
 效果如下，当然color可以自己调：
 
