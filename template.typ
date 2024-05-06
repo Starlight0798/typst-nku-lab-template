@@ -37,6 +37,7 @@
   department: "DEPARTMENT",
   date: (2077, 1, 1),
   show_content_figure: false,
+  watermark: "",
   body,
 ) = {
   set page("a4")
@@ -183,6 +184,13 @@
     breakable: true,
   )
   show raw.where(lang: "pintora"): it => pintorita.render(it.text)
+
+  // 水印
+  set page(background: rotate(-60deg,
+  text(100pt, fill: rgb("#faf2f1"))[
+      #strong()[#watermark]
+    ]
+  ))
 
   body
 }
