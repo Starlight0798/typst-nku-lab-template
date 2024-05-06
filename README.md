@@ -92,4 +92,4 @@ _这是一份用于NKU实验报告的typst模板，涵盖封面，目录，标�
 
 ### 效果
 
-![demo](demo.svg)
+![demo](demo.png)
