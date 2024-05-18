@@ -1,12 +1,13 @@
 #import "template.typ": *
 #import "@preview/treet:0.1.1": *
+#import "@preview/iconic-salmon-fa:1.0.0": *
 #import "@preview/tablex:0.0.8": tablex, rowspanx, colspanx
 #import "@preview/cetz:0.2.2"
 #import "@preview/pinit:0.1.4": *
 #import "@preview/colorful-boxes:1.3.1": *
 #import "@preview/showybox:2.0.1": *
 #import "@preview/conchord:0.2.0": *
-#import "@preview/fletcher:0.4.4" as fletcher: node, edge
+#import "@preview/fletcher:0.4.5" as fletcher: node, edge
 #import "@preview/badgery:0.1.1": *
 #import "@preview/chic-hdr:0.4.0": *
 #import "@preview/riesketcher:0.2.0": riesketcher
@@ -92,10 +93,14 @@ terms:
 #link(<mylink>)[点击跳转链接] \
 _这是一个被强调的内容_ \
 
+
+
 == 二级标题
 
 #lorem(20)
 #figure(image("./img/NKU-logo.png", width: 10%), caption: "南开大学校徽")
+
+== 测试treet
 
 树状图：\
 #tree-list[
@@ -132,6 +137,13 @@ _这是一个被强调的内容_ \
       - 3.1.1
     - 3.2
 ])
+
+== 测试iconic-salmon-fa
+#github-info("Bi0T1N", url: "https://www.xing.com/pages/claas")
+#h(1cm)
+#github-info("Bi0T1N", rgb("#ab572a"))
+#h(1cm)
+#github-info("Bi0T1N", green)
 
 == 测试cheq
 
