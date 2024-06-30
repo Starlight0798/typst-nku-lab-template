@@ -4,7 +4,7 @@
 #import "@preview/pintorita:0.1.1"
 #import "@preview/gentle-clues:0.8.0": *
 #import "@preview/cheq:0.1.0": checklist
-#import "@preview/unify:0.5.0": num, qty, numrange, qtyrange
+#import "@preview/unify:0.6.0": num, qty, numrange, qtyrange
 
 #let Heiti = ("Times New Roman", "Heiti SC", "Heiti TC", "SimHei")
 #let Songti = ("Times New Roman", "Songti SC", "Songti TC", "SimSun")
