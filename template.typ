@@ -1,15 +1,17 @@
-#import "@preview/chic-hdr:0.4.0": *
-#import "@preview/codly:0.2.1": *
+#import "@preview/codly:1.2.0": *
+#import "@preview/codly-languages:0.1.7": *
 #import "@preview/i-figured:0.2.4"
-#import "@preview/pintorita:0.1.1"
-#import "@preview/gentle-clues:0.8.0": *
-#import "@preview/cheq:0.1.0": checklist
-#import "@preview/unify:0.6.0": num, qty, numrange, qtyrange
+#import "@preview/pintorita:0.1.3"
+#import "@preview/gentle-clues:1.2.0": *
+#import "@preview/cheq:0.2.2": checklist
+#import "@preview/unify:0.7.1": num, qty, numrange, qtyrange
+#import "@preview/thmbox:0.2.0": *
+#import "@preview/hydra:0.6.0": hydra
 
 #let Heiti = ("Times New Roman", "Heiti SC", "Heiti TC", "SimHei")
 #let Songti = ("Times New Roman", "Songti SC", "Songti TC", "SimSun")
 #let Zhongsong = ("Times New Roman", "STZhongsong", "SimSun")
-#let Xbs = ("Times New Roman", "FZXiaoBiaoSong-B05", "FZXiaoBiaoSong-B05S")
+#let Xbs = ("Times New Roman", "FZXiaoBiaoSong-B05S", "FZXiaoBiaoSong-B05S")
 
 #let indent() = {
   box(width: 2em)
@@ -111,30 +113,26 @@
   pagebreak()
 
   // 页眉页脚设置
-  show: chic.with(
-    chic-header(
-      left-side: smallcaps(
-        text(size: 10pt, font: Xbs)[
-          #course -- #lab_name
-        ],
-      ),
-      right-side: text(size: 10pt, font: Xbs)[
-        #chic-heading-name(dir: "prev")
-      ],
-      side-width: (60%, 0%, 35%),
-    ),
-    chic-footer(
-      center-side: text(size: 11pt, font: Xbs)[
-        #chic-page-number()
-      ],
-    ),
-    chic-separator(on: "header", chic-styled-separator("bold-center")),
-    chic-separator(on: "footer", stroke(dash: "loosely-dashed", paint: gray)),
-    chic-offset(40%),
-    chic-height(2cm),
+  set page(
+    header: context {
+        set text(font: Xbs)
+        align(left, [#course -- #lab_name])
+        v(-0.9cm)
+        align(right, hydra(2))
+        line(length: 100%) 
+        v(5pt)
+    },
+    footer: context [
+      #set align(center)
+      #counter(page).display(
+        "1/1",
+        both: true,
+      )
+    ]
   )
 
   // 正文设置
+  show: thmbox-init()
   set heading(numbering: "1.1")
   set figure(supplement: [图])
   show heading: i-figured.reset-counters.with(level: 2)
@@ -176,13 +174,7 @@
 
   // 代码段设置
   show: codly-init.with()
-  codly(
-    display-icon: false,
-    stroke-color: luma(200),
-    zebra-color: luma(240),
-    enable-numbers: true,
-    breakable: true,
-  )
+  codly(languages: codly-languages)
   show raw.where(lang: "pintora"): it => pintorita.render(it.text)
 
   // 水印

@@ -1,24 +1,25 @@
 #import "template.typ": *
 #import "@preview/treet:0.1.1": *
-#import "@preview/iconic-salmon-fa:1.0.0": *
-#import "@preview/tablex:0.0.8": tablex, rowspanx, colspanx
-#import "@preview/pinit:0.1.4": *
-#import "@preview/colorful-boxes:1.3.1": *
-#import "@preview/showybox:2.0.1": *
-#import "@preview/conchord:0.2.0": *
+#import "@preview/pinit:0.2.2": *
+#import "@preview/cetz:0.3.2": canvas, draw, tree
+#import "@preview/colorful-boxes:1.4.2": *
+#import "@preview/showybox:2.0.4": *
+#import "@preview/conchord:0.3.0": *
 #import "@preview/badgery:0.1.1": *
-#import "@preview/riesketcher:0.2.0": riesketcher
-#import "@preview/syntree:0.2.0": syntree
-#import "@preview/physica:0.9.3": *
-#import "@preview/mitex:0.2.4": *
-#import "@preview/easytable:0.1.0": easytable, elem
-#import elem: *
-#import "@preview/algo:0.3.3": algo, i, d, comment, code
-#import "@preview/diagraph:0.2.1": *
-#import "@preview/xarrow:0.3.0": xarrow, xarrowSquiggly, xarrowTwoHead
-#import "@preview/neoplot:0.0.1" as gp
-#import "@preview/pyrunner:0.1.0" as py
-#import "@preview/note-me:0.2.1" as nt
+#import "@preview/syntree:0.2.1": syntree
+#import "@preview/physica:0.9.4": *
+#import "@preview/mitex:0.2.5": *
+#import "@preview/algo:0.3.4": algo, i, d, comment, code
+#import "@preview/diagraph:0.3.1": *
+#import "@preview/xarrow:0.3.1": xarrow, xarrowSquiggly, xarrowTwoHead
+#import "@preview/neoplot:0.0.3" as gp
+#import "@preview/pyrunner:0.2.0" as py
+#import "@preview/note-me:0.5.0" as nt
+#import "@preview/iconic-salmon-svg:3.0.0": *
+#import "@preview/echarm:0.2.1"
+#import "@preview/mannot:0.2.2": *
+#import "@preview/tblr:0.3.1": *
+#import "@preview/ourchat:0.1.0" as oc: default-profile
 
 #show: project.with(
   course: "计算机网络",
@@ -137,13 +138,47 @@ _这是一个被强调的内容_ \
   ],
 )
 
-== 测试iconic-salmon-fa
-#github-info("Bi0T1N", url: "https://www.xing.com/pages/claas")
-#h(1cm)
-#github-info("Bi0T1N", rgb("#ab572a"))
-#h(1cm)
-#github-info("Bi0T1N", green)
+== 测试tblr
+#let pop = from-csv("
+China,1313,9596,136.9
+India,1095,3287,333.2
+United States,298,9631,31.0
+Indonesia,245,1919,127.9
+Brazil,188,8511,22.1
+Pakistan,165,803,206.2
+Bangladesh,147,144,1023.4
+Russia,142,17075,8.4
+Nigeria,131,923,142.7"
+)
 
+#context tblr(header-rows: 1, columns: 4,
+  align: (left+bottom, center, center, center),
+  // formatting directives
+  rows(within: "header", 0, fill: aqua.lighten(60%), hooks: strong),
+  cols(within: "body", 0, fill: gray.lighten(70%), hooks: strong),
+  rows(within: "body", 1, 6, hooks: text.with(red)),
+  cells(((2, -3), end), hooks: strong),
+  col-apply(within: "body", span(1, end), decimal-align), 
+  note((-3, 3), "Highest value"),
+  // content
+  [Country], [Population \ (millions)],[Area\ (1000 sq. mi.)],[Pop. Density\ (per sq. mi.)],
+  ..pop
+)
+
+== 测试mannot
+$
+  markul(p_i, tag: #<p>)
+  = markrect(
+    exp(- marktc(beta, tag: #<beta>) marktc(E_i, tag: #<E>, color: #green)),
+    tag: #<Boltzmann>, color: #blue,
+  ) / mark(sum_j exp(- beta E_j), tag: #<Z>)
+
+  #annot(<p>, pos: left)[Probability of \ state $i$]
+  #annot(<beta>, pos: top + left, yshift: 2em)[Inverse temperature]
+  #annot(<E>, pos: top + right, yshift: 1em)[Energy]
+  #annot(<Boltzmann>, pos: top + left)[Boltzmann factor]
+  #annot(<Z>)[Partition function]
+$
 
 == 测试badgery
 #badge-gray("Gray badge")
@@ -155,6 +190,33 @@ _这是一个被强调的内容_ \
 #ui-action("Click me")
 #menu("File", "New File...")
 #menu("Menu", "Sub-menu", "Sub-sub menu", "Action")
+
+== 测试iconic-salmon-svg
+This project was created by #github-info("Bi0T1N"). You can also find me on #gitlab-info("GitLab", rgb("#811052"), url: "https://gitlab.com/Bi0T1N").
+
+== 测试cetz
+#canvas({
+  import draw: *
+
+  let data = (
+    [A], ([B], [C], [D]), ([E], [F])
+  )
+  set-style(content: (padding: .2),
+    fill: gray.lighten(70%),
+    stroke: gray.lighten(70%))
+
+  tree.tree(data, spread: 2.5, grow: 1.5, draw-node: (node, ..) => {
+    circle((), radius: .45, stroke: none)
+    content((), node.content)
+  }, draw-edge: (from, to, ..) => {
+    line((a: from, number: .6, b: to),
+         (a: to, number: .6, b: from), mark: (end: ">"))
+  }, name: "tree")
+
+  // Draw a "custom" connection between two nodes
+  let (a, b) = ("tree.0-0-1", "tree.0-1-0",)
+  line((a, .6, b), (b, .6, a), mark: (end: ">", start: ">"))
+})
 
 
 == 测试gentle
@@ -173,6 +235,51 @@ _这是一个被强调的内容_ \
 #conclusion[ This is the info clue ... ]
 #memo[ This is the info clue ... ]
 #clue(title: none, icon: none, accent-color: orange)[We should run more tests!]
+
+== 测试thmbox
+#theorem[
+    This is created using #raw("#theorem[...]", lang: "typ").
+]
+
+#proposition[
+    This is created using #raw("#proposition[...]", lang: "typ").
+]
+
+#lemma[
+    This is created using #raw("#lemma[...]", lang: "typ").
+]
+
+#corollary[
+    This is created using #raw("#corollary[...]", lang: "typ").
+]
+
+#definition[
+    This is created using #raw("#definition[...]", lang: "typ").
+]
+
+#example[
+    This is created using #raw("#example[...]", lang: "typ").
+]
+
+#remark[
+    This is created using #raw("#remark[...]", lang: "typ").
+]
+
+#exercise[
+    This is created using #raw("#exercise[...]", lang: "typ").
+]
+
+#algorithm[
+    This is created using #raw("#algorithm[...]", lang: "typ").
+]
+
+#claim[
+    This is created using #raw("#claim[...]", lang: "typ").
+]
+
+#axiom[
+    This is created using #raw("#axiom[...]", lang: "typ").
+]
 
 == 测试note-me
 #nt.note[
@@ -240,8 +347,7 @@ _这是一个被强调的内容_ \
   footer: text(
     size: 10pt,
     weight: 600,
-    emph("This will be useful every
-                                                              time you want to interchange partial derivatives in the future."),
+    emph("This will be useful every time you want to interchange partial derivatives in the future."),
   ),
 )[
   Let $f: A arrow RR$ with $A subset RR^n$ an open set such that its cross derivatives of any order exist and are
@@ -298,6 +404,32 @@ _这是一个被强调的内容_ \
   ],
 )
 
+== 测试ourchat
+#oc.chat(
+  left-profile: default-profile,
+  oc.datetime[11月3日 中午12:05],
+  oc.message(left, name: [丘成桐（囯內）])[
+    已經到了無恥的地步。
+  ],
+  oc.datetime[11月9日 凌晨00:06],
+  oc.message(left, name: [丘成桐（囯內）])[
+    我宣布他已經不是我的學生了
+  ],
+  oc.datetime[昨天 12:31],
+  oc.message(left, name: [丘成桐（囯內）])[
+    告诉学生們，去修 birkar 的課，交論文，得分最高的，獎一个华为手表。
+  ],
+  oc.datetime[14:00],
+  oc.message(left, name: [丘成桐（囯內）])[
+    這種成績，使人汗顏！如此成績，如何招生？
+  ],
+  oc.message(right, profile: default-profile)[
+    我沒有説過這種話！
+
+    ——發自我的手機
+  ],
+)
+
 == 测试syntree
 #figure(
   caption: "Example of a syntax tree.",
@@ -306,118 +438,6 @@ _这是一个被强调的内容_ \
     terminal: (style: "italic"),
     "[S [NP [Det the] [Nom [Adj little] [N bear]]] [VP [VP [V saw] [NP [Det the] [Nom [Adj] [Adj] [N ]]]] [PP [P in] [^NP the brook]]]]",
   ),
-)
-
-== 测试easytable
-#figure(
-  easytable({
-    let th = th.with(trans: emph)
-    let tr = tr.with(cell_style: (x: none, y: none) => (
-      fill: if calc.even(y) {
-        luma(95%)
-      } else {
-        none
-      },
-    ))
-    cstyle(center, center, center)
-    th[Header 1][Header 2][Header 3]
-    tr[How][I][want]
-    tr[a][drink,][alcoholic]
-    tr[of][course,][after]
-    tr[the][heavy][lectures]
-    tr[involving][quantum][mechanics.]
-  }),
-  caption: [表格示例],
-  supplement: [表],
-)
-
-#easytable({
-  cwidth(100pt, 1fr, 20%)
-  cstyle(left, center, right)
-  th[Header 1 ][Header 2][Header 3 ]
-  tr[How ][I ][want ]
-  tr[a ][drink, ][alcoholic ]
-  tr[of ][course, ][after ]
-  tr[the ][heavy ][lectures ]
-  tr[involving][quantum ][mechanics.]
-})
-
-#figure(
-  caption: [表格示例],
-  easytable({
-    let tr = tr.with(trans: pad.with(x: 3pt))
-
-    th[Header 1][Header 2][Header 3]
-    tr[How][I][want]
-    tr[a][drink,][alcoholic]
-    tr[of][course,][after]
-    tr[the][heavy][lectures]
-    tr[involving][quantum][mechanics.]
-  }),
-)
-
-== 测试tablex
-#figure(
-  supplement: [表],
-  caption: "一个表格",
-  tablex(
-  columns: 4,
-  align: center + horizon,
-  auto-vlines: false,
-  // indicate the first two rows are the header
-  // (in case we need to eventually
-  // enable repeating the header across pages)
-  header-rows: 2,
-  // color the last column's cells
-  // based on the written number
-  map-cells: cell => {
-    if cell.x == 3 and cell.y > 1 {
-      cell.content = {
-        let value = int(cell.content.text)
-        let text-color = if value < 10 {
-          red.lighten(30%)
-        } else if value < 15 {
-          yellow.darken(13%)
-        } else {
-          green
-        }
-        set text(text-color)
-        strong(cell.content)
-      }
-    }
-    cell
-  },
-  /* --- header --- */
-  rowspanx(2)[*Username*],
-  colspanx(2)[*Data*],
-  (),
-  rowspanx(2)[*Score*],
-  (),
-  [*Location*],
-  [*Height*],
-  (),
-  /* -------------- */
-  [John],
-  [Second St.],
-  [180 cm],
-  [5],
-  [Wally],
-  [Third Av.],
-  [160 cm],
-  [10],
-  [Jason],
-  [Some St.],
-  [150 cm],
-  [15],
-  [Robert],
-  [123 Av.],
-  [190 cm],
-  [20],
-  [Other],
-  [Unknown St.],
-  [170 cm],
-  [25],
-),
 )
 
 == 测试codly
@@ -464,21 +484,50 @@ def sum_all(*array):
 
 == 测试neoplot
 #figure(caption: [测试图片],
-  image.decode(
-      gp.eval("
-          set samples 1000;
-          set xlabel 'x axis';
-          set ylabel 'y axis';
-          plot sin(x),
-              cos(x)
-      ")
-  )
+  gp.exec(
+        // Set the width of the graph
+        width: 55%,
+        ```gnuplot
+        reset
+        set term svg size 500,400
+        set xrange[-2.5*pi:2.5*pi]
+        set yrange[-1.3:1.3]
+        plot sin(x), cos(x)
+        ```
+    ),
 )
 
-== 测试riesketcher
-#canvas({
-  riesketcher(x => calc.pow(x, 3) + 4, method: "left", start: -3.1, end: 3.5, n: 10, plot-x-tick-step: 1)
-})
+== 测试echarm
+#echarm.render(width: 100%, height: 30%, options: (
+  legend: (
+    top: "5%",
+    left: "center"
+  ),
+  series: (
+    name: "Access Form",
+    type: "pie",
+    radius: ("40%", "70%"),
+    avoidLabelOverlap: false,
+    itemStyle: (
+      borderRadius: 10,
+      borderColor: "#fff",
+      borderWidth: 2,
+    ),
+    label: (
+      "show": false,
+    ),
+    labelLine: (
+      "show": false,
+    ),
+    data: (
+      (value: 1048, name: "Search Engine"),
+      (value: 735, name: "Direct"),
+      (value: 580, name: "Email"),
+      (value: 484, name: "Union Ads"),
+      (value: 300, name: "Video Ads"),
+    )
+  ),
+))
 
 
 == 测试physica
@@ -544,8 +593,8 @@ $ qtyrange("1e3", "2e3", "meter per second squared", per: "/", delimiter: "\"to\
 
 == 测试algo
 #algo(
-  title: [ // note that title and parameters
-    #set text(size: 15pt) // can be content
+  title: [                    // note that title and parameters
+    #set text(size: 15pt)     // can be content
     #emph(smallcaps("Fib"))
   ],
   parameters: ([#math.italic("n")],),
@@ -560,17 +609,17 @@ $ qtyrange("1e3", "2e3", "meter per second squared", per: "/", delimiter: "\"to\
   fill: none,
 )[
   if $n < 0$:#i\
-  return null#d\
+    return null#d\
   if $n = 0$ or $n = 1$:#i\
-  return $n$#d\
+    return $n$#d\
   \
   let $x <- 0$\
   let $y <- 1$\
   for $i <- 2$ to $n-1$:#i #comment[so dynamic!]\
-  let $z <- x+y$\
-  $x <- y$\
-  $y <- z$#d\
-  \
+    let $z <- x+y$\
+    $x <- y$\
+    $y <- z$#d\
+    \
   return $x+y$
 ]
 
