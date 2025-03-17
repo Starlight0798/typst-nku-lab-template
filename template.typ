@@ -1,5 +1,6 @@
 #import "@preview/codly:1.2.0": *
 #import "@preview/codly-languages:0.1.7": *
+#import "@preview/chic-hdr:0.5.0": *
 #import "@preview/i-figured:0.2.4"
 #import "@preview/pintorita:0.1.3"
 #import "@preview/gentle-clues:1.2.0": *
@@ -113,22 +114,27 @@
   pagebreak()
 
   // 页眉页脚设置
-  set page(
-    header: context {
-        set text(font: Xbs)
-        align(left, [#course -- #lab_name])
-        v(-0.9cm)
-        align(right, hydra(2))
-        line(length: 100%) 
-        v(5pt)
-    },
-    footer: context [
-      #set align(center)
-      #counter(page).display(
-        "1/1",
-        both: true,
-      )
-    ]
+  show: chic.with(
+    chic-header(
+      left-side: smallcaps(
+        text(size: 10pt, font: Xbs)[
+          #course -- #lab_name
+        ],
+      ),
+      right-side: text(size: 10pt, font: Xbs)[
+        #chic-heading-name(dir: "prev")
+      ],
+      side-width: (60%, 0%, 35%),
+    ),
+    chic-footer(
+      center-side: text(size: 11pt, font: Xbs)[
+        #chic-page-number()
+      ],
+    ),
+    chic-separator(on: "header", chic-styled-separator("bold-center")),
+    chic-separator(on: "footer", stroke(dash: "loosely-dashed", paint: gray)),
+    chic-offset(40%),
+    chic-height(2cm),
   )
 
   // 正文设置
