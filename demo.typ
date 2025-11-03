@@ -1,25 +1,24 @@
 #import "template.typ": *
-#import "@preview/treet:0.1.1": *
+#import "@preview/treet:1.0.0": *
 #import "@preview/pinit:0.2.2": *
-#import "@preview/cetz:0.3.2": canvas, draw, tree
-#import "@preview/colorful-boxes:1.4.2": *
+#import "@preview/cetz:0.4.2": canvas, draw, tree
+#import "@preview/colorful-boxes:1.4.3": *
 #import "@preview/showybox:2.0.4": *
-#import "@preview/conchord:0.3.0": *
+#import "@preview/conchord:0.4.0": *
 #import "@preview/badgery:0.1.1": *
 #import "@preview/syntree:0.2.1": syntree
-#import "@preview/physica:0.9.4": *
+#import "@preview/physica:0.9.7": *
 #import "@preview/mitex:0.2.5": *
-#import "@preview/algo:0.3.4": algo, i, d, comment, code
-#import "@preview/diagraph:0.3.1": *
+#import "@preview/algo:0.3.6": algo, i, d, comment, code
+#import "@preview/diagraph:0.3.6": *
 #import "@preview/xarrow:0.3.1": xarrow, xarrowSquiggly, xarrowTwoHead
-#import "@preview/neoplot:0.0.3" as gp
-#import "@preview/pyrunner:0.2.0" as py
+#import "@preview/neoplot:0.0.4" as gp
+#import "@preview/pyrunner:0.3.0" as py
 #import "@preview/note-me:0.5.0" as nt
 #import "@preview/iconic-salmon-svg:3.0.0": *
-#import "@preview/echarm:0.2.1"
-#import "@preview/mannot:0.2.2": *
-#import "@preview/tblr:0.3.1": *
-#import "@preview/ourchat:0.1.0" as oc: default-profile
+#import "@preview/echarm:0.3.1"
+#import "@preview/mannot:0.3.0": *
+#import "@preview/tblr:0.4.1": *
 
 #show: project.with(
   course: "计算机网络",
@@ -167,15 +166,14 @@ Nigeria,131,923,142.7"
 
 == 测试mannot
 $
-  markul(p_i, tag: #<p>)
-  = markrect(
-    exp(- marktc(beta, tag: #<beta>) marktc(E_i, tag: #<E>, color: #green)),
+  markul(p_i, tag: #<p>) = markrect(
+    exp(- mark(beta, tag: #<beta>, color: #red) mark(E_i, tag: #<E>, color: #green)),
     tag: #<Boltzmann>, color: #blue,
-  ) / mark(sum_j exp(- beta E_j), tag: #<Z>)
+  ) / markhl(sum_j exp(- beta E_j), tag: #<Z>)
 
-  #annot(<p>, pos: left)[Probability of \ state $i$]
-  #annot(<beta>, pos: top + left, yshift: 2em)[Inverse temperature]
-  #annot(<E>, pos: top + right, yshift: 1em)[Energy]
+  #annot(<p>, pos: bottom + left)[Probability of \ state $i$]
+  #annot(<beta>, pos: top + left, dy: -1.5em, leader-connect: "elbow")[Inverse temperature]
+  #annot(<E>, pos: top + right, dy: -1em)[Energy]
   #annot(<Boltzmann>, pos: top + left)[Boltzmann factor]
   #annot(<Z>)[Partition function]
 $
@@ -401,32 +399,6 @@ This project was created by #github-info("Bi0T1N"). You can also find me on #git
     #showybox(title-style: (boxed-style: (:)), title: "Child 1", lorem(10))
     #colbreak()
     #showybox(title-style: (boxed-style: (:)), title: "Child 2", lorem(10))
-  ],
-)
-
-== 测试ourchat
-#oc.chat(
-  left-profile: default-profile,
-  oc.datetime[11月3日 中午12:05],
-  oc.message(left, name: [丘成桐（囯內）])[
-    已經到了無恥的地步。
-  ],
-  oc.datetime[11月9日 凌晨00:06],
-  oc.message(left, name: [丘成桐（囯內）])[
-    我宣布他已經不是我的學生了
-  ],
-  oc.datetime[昨天 12:31],
-  oc.message(left, name: [丘成桐（囯內）])[
-    告诉学生們，去修 birkar 的課，交論文，得分最高的，獎一个华为手表。
-  ],
-  oc.datetime[14:00],
-  oc.message(left, name: [丘成桐（囯內）])[
-    這種成績，使人汗顏！如此成績，如何招生？
-  ],
-  oc.message(right, profile: default-profile)[
-    我沒有説過這種話！
-
-    ——發自我的手機
   ],
 )
 

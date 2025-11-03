@@ -1,25 +1,23 @@
-#import "@preview/codly:1.2.0": *
-#import "@preview/codly-languages:0.1.7": *
+#import "@preview/codly:1.3.0": *
+#import "@preview/codly-languages:0.1.10": *
 #import "@preview/chic-hdr:0.5.0": *
 #import "@preview/i-figured:0.2.4"
-#import "@preview/pintorita:0.1.3"
+#import "@preview/pintorita:0.1.4"
 #import "@preview/gentle-clues:1.2.0": *
-#import "@preview/cheq:0.2.2": checklist
+#import "@preview/cheq:0.3.0": checklist
 #import "@preview/unify:0.7.1": num, qty, numrange, qtyrange
-#import "@preview/thmbox:0.2.0": *
-#import "@preview/hydra:0.6.0": hydra
+#import "@preview/thmbox:0.3.0": *
+#import "@preview/hydra:0.6.2": hydra
 
-#let Heiti = ("Times New Roman", "Heiti SC", "Heiti TC", "SimHei")
 #let Songti = ("Times New Roman", "Songti SC", "Songti TC", "SimSun")
-#let Zhongsong = ("Times New Roman", "STZhongsong", "SimSun")
-#let Xbs = ("Times New Roman", "FZXiaoBiaoSong-B05S", "FZXiaoBiaoSong-B05S")
+#let Heiti = ("Times New Roman", "Heiti SC", "Heiti TC", "SimHei")
 
 #let indent() = {
   box(width: 2em)
 }
 
 #let info_key(body) = {
-  rect(width: 100%, inset: 2pt, stroke: none, text(font: Zhongsong, size: 16pt, body))
+  rect(width: 100%, inset: 2pt, stroke: none, text(font: Songti, size: 16pt, body))
 }
 
 #let info_value(body) = {
@@ -27,7 +25,7 @@
     width: 100%,
     inset: 2pt,
     stroke: (bottom: 1pt + black),
-    text(font: Zhongsong, size: 16pt, bottom-edge: "descender")[ #body ],
+    text(font: Songti, size: 16pt, bottom-edge: "descender")[ #body ],
   )
 }
 
@@ -50,18 +48,18 @@
     #v(2em)
     #set text(
       size: 26pt,
-      font: Zhongsong,
+      font: Songti,
       weight: "bold",
     )
 
     // 课程名
-    #text(size: 25pt, font: Xbs)[
+    #text(size: 25pt, font: Songti)[
       _#course _课程实验报告
     ]
     #v(1em)
 
     // 报告名
-    #text(size: 22pt, font: Xbs)[
+    #text(size: 22pt, font: Songti)[
       _#lab_name _
     ]
     #image("./img/NKU-logo.png", width: 40%)
@@ -84,7 +82,7 @@
     #v(1pt)
 
     // 日期
-    #text(font: Zhongsong, size: 14pt)[
+    #text(font: Songti, size: 14pt)[
       #date.at(0) 年 #date.at(1) 月 #date.at(2) 日
     ]
   ]
@@ -97,17 +95,17 @@
   }
   show outline.entry: it => {
     set text(
-      font: Xbs,
+      font: Songti,
       size: 12pt,
     )
     it
   }
   outline(
-    title: text(font: Xbs, size: 16pt)[目录],
+    title: text(font: Songti, size: 16pt)[目录],
     indent: auto,
   )
   if show_content_figure {
-    text(font: Xbs, size: 10pt)[
+    text(font: Songti, size: 10pt)[
       #i-figured.outline(title: [图表])
     ]
   }
@@ -117,17 +115,17 @@
   show: chic.with(
     chic-header(
       left-side: smallcaps(
-        text(size: 10pt, font: Xbs)[
+        text(size: 10pt, font: Songti)[
           #course -- #lab_name
         ],
       ),
-      right-side: text(size: 10pt, font: Xbs)[
+      right-side: text(size: 10pt, font: Songti)[
         #chic-heading-name(dir: "prev")
       ],
       side-width: (60%, 0%, 35%),
     ),
     chic-footer(
-      center-side: text(size: 11pt, font: Xbs)[
+      center-side: text(size: 11pt, font: Songti)[
         #chic-page-number()
       ],
     ),
@@ -155,7 +153,7 @@
   )
   show heading: it => box(width: 100%)[ // 标题设置
     #v(0.45em)
-    #set text(font: Xbs)
+    #set text(font: Songti)
     #if it.numbering != none {
       counter(heading).display()
     }
