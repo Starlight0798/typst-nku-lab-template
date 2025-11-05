@@ -19,17 +19,17 @@ _这是一份用于ZJU实验报告的typst模板，涵盖封面，目录，标�
 
 ### 使用方法
 
-​	使用模板方法如下：
+使用模板方法如下：
 
 1. 创建你的typst文件，比如main.typ
 
-2. 将仓库的img文件夹，template.typ放入main.typ同目录下
+2. 将仓库的img文件夹，template.typ, template.typ放入main.typ同目录下
 
 3.  在main.typ插入如下代码：
 
 	```javascript
-	#import "template.typ": *
-	#import XXX  // 这里引入你需要使用的其他包(若干)，参照demo.typ
+	#import "imports.typ": *  //引入你需要使用的其他包(若干)在template中
+	#import "template.typ": project, indent  
 	
 	#show: project.with(
 	  course: "计算机网络",
@@ -39,8 +39,8 @@ _这是一份用于ZJU实验报告的typst模板，涵盖封面，目录，标�
 	  major: "土木工程",
 	  department: "火星土木学院",
 	  date: (2077, 1, 1),
-	  show_content_figure: True	 // 是否在目录页加上图表的索引
-	  watermark: "ZJU",  		// 水印，不写或写空字符串则无水印
+	  show_content_figure: true, // 是否在目录页加上图表的索引
+	  watermark: "ZJU",          // 水印，不写或写空字符串则无水印
 	)
 	```
 
@@ -62,10 +62,11 @@ _这是一份用于ZJU实验报告的typst模板，涵盖封面，目录，标�
 
 <img src="assets/image-20240427141309450.png" alt="image-20240427141309450" style="zoom: 80%;" />
 
-那么首先需要在你的main.typ中顶部引入包，具体是哪个包，我在demo中二级标题都有注明：
+那么首先需要在你的template.typ中顶部引入包，具体是哪个包，我在demo中二级标题都有注明：
 
 ```js
-#import "@preview/colorful-boxes:1.4.2": *
+#import "@preview/colorful-boxes:1.4.3": colorbox, slanted-colorbox, outline-colorbox
+// 注意最好不要 #import "xxx": *, 使用星号都引入可能造成命名冲突和库版本不一致冲突
 ```
 
 然后在你需要放置的部分加入以下代码：
@@ -83,8 +84,6 @@ _这是一份用于ZJU实验报告的typst模板，涵盖封面，目录，标�
 <img src="assets/image-20240427141525685.png" alt="image-20240427141525685" style="zoom: 80%;" />
 
 其余任何组件同理。
-
-**(注：codly等包我在模板文件已经引入，无需再次引入)**
 
 ------
 
