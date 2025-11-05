@@ -1,24 +1,5 @@
-#import "template.typ": *
-#import "@preview/treet:1.0.0": *
-#import "@preview/pinit:0.2.2": *
-#import "@preview/cetz:0.4.2": canvas, draw, tree
-#import "@preview/colorful-boxes:1.4.3": *
-#import "@preview/showybox:2.0.4": *
-#import "@preview/conchord:0.4.0": *
-#import "@preview/badgery:0.1.1": *
-#import "@preview/syntree:0.2.1": syntree
-#import "@preview/physica:0.9.7": *
-#import "@preview/mitex:0.2.5": *
-#import "@preview/algo:0.3.6": algo, i, d, comment, code
-#import "@preview/diagraph:0.3.6": *
-#import "@preview/xarrow:0.3.1": xarrow, xarrowSquiggly, xarrowTwoHead
-#import "@preview/neoplot:0.0.4" as gp
-#import "@preview/pyrunner:0.3.0" as py
-#import "@preview/note-me:0.5.0" as nt
-#import "@preview/iconic-salmon-svg:3.0.0": *
-#import "@preview/echarm:0.3.1"
-#import "@preview/mannot:0.3.0": *
-#import "@preview/tblr:0.4.1": *
+#import "imports.typ": *
+#import "template.typ": project, indent
 
 #show: project.with(
   course: "计算机网络",
@@ -29,7 +10,7 @@
   department: "火星土木学院",
   date: (2077, 1, 1),
   show_content_figure: true,
-  watermark: "NKU",
+  watermark: "ZJU",
 )
 
 #let mytest = [通过这次实验，我深刻体会到了同态加密技术的强大和实用性，特别是在保护数据隐私的同时执行复杂计算的能力。使用Microsoft SEAL库进行加密计算不仅加深了我对同态加密原理的理解，也提升了我的编程技能和解决实际问题的能力。]
@@ -98,7 +79,7 @@ _这是一个被强调的内容_ \
 == 二级标题
 
 #lorem(20)
-#figure(image("./img/NKU-logo.png", width: 10%), caption: "南开大学校徽")
+#figure(image("./img/ZJU-logo.png", width: 10%), caption: "浙江大学校徽")
 
 == 测试treet
 
@@ -164,6 +145,49 @@ Nigeria,131,923,142.7"
   ..pop
 )
 
+#tblr(header-rows: 1, 
+  table-fun: ztable,
+  align: (left+bottom, center, center, center),
+  // ztable formatting
+  format: (none, auto, auto, auto),
+  // formatting directives
+  rows(within: "header", 0, fill: blue, hooks: (strong, text.with(white))),
+  rows(within: "body", calc.even, fill: gray.lighten(80%)),
+  // content
+  [Country], [Population \ (millions)],[Area\ (1000 sq. mi.)],[Pop. Density\ (per sq. mi.)],
+  ..pop
+)
+
+#tblr(columns: 7, header-rows: 2,
+  stroke: none,
+  // combine header cells
+  cells((0, (1,4)), colspan: 3, stroke: (bottom: 0.03em)),
+  column-gutter: 0.6em,
+  // booktabs style rules
+  rows(within: "header", auto, inset: (y: 0.5em)),
+  rows(within: "header", auto, align: center),
+  hline(within: "header", y: 0, stroke: 0.08em),
+  hline(within: "header", y: end, position: bottom, stroke: 0.05em),
+  rows(within: "body", 0, inset: (top: 0.5em)),
+  hline(y: end, position: bottom, stroke: 0.08em),
+  rows(end, inset: (bottom: 0.5em)),
+  // table notes, remarks, and caption
+  note((1, (1,4)), [$m v$ is in kg·m².]),
+  note((1, (3,6)), [Time is in secs.]),
+  note(sym.dagger, (2, 0), [Another note.]),
+  remarks: [_Note:_ ] + lorem(18),
+  note-fun: x => super(text(fill: blue, x)),
+  note-numbering: "a",
+  // content
+  [], [tol $= mu_"single"$], [], [], [tol $= mu_"double"$], [], [],
+  [], [$m v$], [Rel.~err], [Time], [$m v$], [Rel.~err], [Time], 
+  [trigmv],  [11034], [1.3e-7], [3.9], [15846], [2.7e-11], [5.6], 
+  [trigexpmv], [21952], [1.3e-7], [6.2], [31516], [2.7e-11], [8.8], 
+  [trigblock], [15883], [5.2e-8], [7.1], [32023], [1.1e-11], [1.4e1], 
+  [expleja], [11180], [8.0e-9], [4.3], [17348], [1.5e-11], [6.6])
+  
+#pagebreak()
+
 == 测试mannot
 $
   markul(p_i, tag: #<p>) = markrect(
@@ -192,28 +216,75 @@ $
 == 测试iconic-salmon-svg
 This project was created by #github-info("Bi0T1N"). You can also find me on #gitlab-info("GitLab", rgb("#811052"), url: "https://gitlab.com/Bi0T1N").
 
+== 测试finite
+#automaton((
+  q0: (q1:0, q0:"0,1"),
+  q1: (q0:(0,1), q2:"0"),
+  q2: (),
+))
+
 == 测试cetz
+#let f1(x) = calc.sin(x)
+#let fn = (
+  ($ x - x^3"/"3! $, x => x - calc.pow(x, 3)/6),
+  ($ x - x^3"/"3! - x^5"/"5! $, x => x - calc.pow(x, 3)/6 + calc.pow(x, 5)/120),
+  ($ x - x^3"/"3! - x^5"/"5! - x^7"/"7! $, x => x - calc.pow(x, 3)/6 + calc.pow(x, 5)/120 - calc.pow(x, 7)/5040),
+)
 #canvas({
   import draw: *
 
-  let data = (
-    [A], ([B], [C], [D]), ([E], [F])
+  // Set-up a thin axis style
+  set-style(axes: (stroke: .5pt, tick: (stroke: .5pt)),
+            legend: (stroke: none, orientation: ttb, item: (spacing: .3), scale: 80%))
+
+  plot.plot(size: (12, 8),
+    x-tick-step: calc.pi/2,
+    x-format: plot.formats.multiple-of,
+    y-tick-step: 2, y-min: -2.5, y-max: 2.5,
+    legend: "inner-north",
+    {
+      let domain = (-1.1 * calc.pi, +1.1 * calc.pi)
+
+      for ((title, f)) in fn {
+        plot.add-fill-between(f, f1, domain: domain,
+          style: (stroke: none), label: title)
+      }
+      plot.add(f1, domain: domain, label: $ sin x  $,
+        style: (stroke: black))
+    })
+})
+
+#let data = (
+  ([Cash],     768),
+  ([Funds],    1312),
+  ([Stocks],   3812),
+  ([Bonds],    7167),
+)
+#let total = data.map(i => i.last()).sum()
+
+#canvas({
+  let colors = gradient.linear(red, yellow)
+
+  chart.pyramid(
+    data,
+    value-key: 1,
+    label-key: 0,
+    mode: "AREA-HEIGHT",
+    stroke: none,
+    level-style: colors,
+    inner-label: (
+      content: (value, label) => align(center, stack(
+        label + "\n",
+        str(calc.round(value / total * 10000) / 100) + "%",
+        spacing: 2pt,
+        dir: ttb
+      ))
+    ),
+    side-label: (
+      content: (value, label) => "$" + str(value)
+    ),
+    gap: 10%
   )
-  set-style(content: (padding: .2),
-    fill: gray.lighten(70%),
-    stroke: gray.lighten(70%))
-
-  tree.tree(data, spread: 2.5, grow: 1.5, draw-node: (node, ..) => {
-    circle((), radius: .45, stroke: none)
-    content((), node.content)
-  }, draw-edge: (from, to, ..) => {
-    line((a: from, number: .6, b: to),
-         (a: to, number: .6, b: from), mark: (end: ">"))
-  }, name: "tree")
-
-  // Draw a "custom" connection between two nodes
-  let (a, b) = ("tree.0-0-1", "tree.0-1-0",)
-  line((a, .6, b), (b, .6, a), mark: (end: ">", start: ">"))
 })
 
 
@@ -320,12 +391,22 @@ This project was created by #github-info("Bi0T1N"). You can also find me on #git
 // First showybox
 ①
 #showybox(
-  frame: (border-color: red.darken(50%), title-color: red.lighten(70%), body-color: red.lighten(90%)),
-  title-style: (color: black, weight: "regular", align: center),
-  shadow: (offset: 3pt),
+  frame: (
+    border-color: red.darken(50%),
+    title-color: red.lighten(60%),
+    body-color: red.lighten(90%)
+  ),
+  title-style: (
+    color: black,
+    weight: "regular",
+    align: center
+  ),
+  shadow: (
+    offset: 3pt,
+  ),
   title: "Red-ish showybox with separated sections!",
   lorem(20),
-  lorem(12),
+  lorem(12)
 )
 
 // Second showybox
@@ -351,8 +432,8 @@ This project was created by #github-info("Bi0T1N"). You can also find me on #git
   Let $f: A arrow RR$ with $A subset RR^n$ an open set such that its cross derivatives of any order exist and are
   continuous in $A$. Then for any point $(a_1, a_2, ..., a_n) in A$ it is true that
   $
-    frac(diff^n f, diff x_i ... diff x_j)(a_1, a_2, ..., a_n) =
-    frac(diff^n f, diff x_j ... diff x_i)(a_1, a_2, ..., a_n)
+    frac(partial^n f, partial x_i ... partial x_j)(a_1, a_2, ..., a_n) =
+    frac(partial^n f, partial x_j ... partial x_i)(a_1, a_2, ..., a_n)
   $
 ]
 
@@ -379,10 +460,10 @@ This project was created by #github-info("Bi0T1N"). You can also find me on #git
   footer-style: (sep-thickness: 0pt, align: right, color: black),
   title: "Divergence theorem",
   footer: [
-    In the case of $n=3$, $V$ represents a volumne in three-dimensional space, and $diff V = S$ its surface
+    In the case of $n=3$, $V$ represents a volumne in three-dimensional space, and $partial V = S$ its surface
   ],
 )[
-  Suppose $V$ is a subset of $RR^n$ which is compact and has a piecewise smooth boundary $S$ (also indicated with $diff V = S$).
+  Suppose $V$ is a subset of $RR^n$ which is compact and has a piecewise smooth boundary $S$ (also indicated with $partial V = S$).
   If $bold(F)$ is a continuously differentiable vector field defined on a neighborhood of
   $V$, then:
   $
@@ -402,15 +483,103 @@ This project was created by #github-info("Bi0T1N"). You can also find me on #git
   ],
 )
 
-== 测试syntree
-#figure(
-  caption: "Example of a syntax tree.",
-  syntree(
-    nonterminal: (fill: blue),
-    terminal: (style: "italic"),
-    "[S [NP [Det the] [Nom [Adj little] [N bear]]] [VP [VP [V saw] [NP [Det the] [Nom [Adj] [Adj] [N ]]]] [PP [P in] [^NP the brook]]]]",
-  ),
+⑥
+#grid(
+  columns: (1fr, 1fr),
+  gutter: 1.5em,
+  row-gutter: 1.5em,
+  [
+    #showybox(
+      title: [lorem(10)],
+      frame: (
+        title-color: blue.darken(10%),
+        border-color: blue.darken(50%),
+      ),
+      lorem(50)
+    )
+  ],
+  [
+    #showybox(
+      title: [lorem(10)],
+      frame: (
+        title-color: green.darken(10%),
+        border-color: green.darken(50%),
+      ),
+      lorem(50)
+    )
+  ],
+  [
+    #showybox(
+      title: [lorem(10)],
+      frame: (
+        title-color: orange.darken(10%),
+        border-color: orange.darken(50%),
+      ),
+      lorem(50)
+    )
+  ],
+  [
+    #showybox(
+      title: [lorem(10)],
+      frame: (
+        title-color: purple.darken(10%),
+        border-color: purple.darken(50%),
+      ),
+      lorem(50)
+    )
+  ],
 )
+
+== 测试tdtr
+#tidy-tree-graph(
+  draw-edge: tidy-tree-draws.horizontal-vertical-draw-edge,
+)[
+  - Hello
+    - World
+      - How
+        - Whats
+          - Day
+        - the
+          - Nest
+        - Time
+            - World
+              - Whats
+                - Day
+              - the
+              - Time
+                - Hello
+              - Today
+              - Something
+                - Interesting
+      - This
+      - Day
+        - Hello
+      - People
+    - Things
+    - Become
+    - Somehow
+    - are
+      - People
+      - Hello
+        - World
+        - Day
+          - Hello
+          - World
+          - Fine
+          - I'm
+          - Very
+            - Happy
+            - That
+            - They
+            - have
+            - what
+        - you
+        - Byte
+        - integer
+        - Today
+      - you
+      - Among
+]
 
 == 测试codly
 ```rust
@@ -419,6 +588,51 @@ pub fn main() {
 }
 ```
 #mycode
+
+== 测试lilaq
+#let stacked-area(x, ..y) = {
+  y
+    .pos()
+    .fold(
+      ((0,) * x.len(),) , (ys-stacked, ys) => {
+        let previous = ys-stacked.last()
+        ys-stacked.push(lq.vec.add(previous, ys))
+        ys-stacked
+      }
+    )
+    .windows(2)
+    .map(((y1, y2)) => lq.fill-between(x, y1, y2: y2))
+}
+
+#let x = range(10)
+#let y1= (0, 1, 3, 9, 5, 4, 2, 2, 1, 0)
+#let y2 = (5, 3, 2, 0, 1, 2, 2, 2, 3, 2)
+#let y3 = (0, 0, 0, 0, 1, 2, 4, 5, 5, 9)
+
+#lq.diagram(
+  ..stacked-area(x, y1, y2, y3)
+)
+
+== 测试lovelace
+#figure(
+  kind: "algorithm",
+  supplement: [Algorithm],
+
+  pseudocode-list(booktabs: true, numbered-title: [My cool algorithm])[
+    + do something
+    + do something else
+    + *while* still something to do
+      + do even more
+      + *if* not done yet *then*
+        + wait a bit
+        + resume working
+      + *else*
+        + go home
+      + *end*
+    + *end*
+  ]
+) <cool>
+See @cool for details on how to do something cool.
 
 == 测试cheq
 
@@ -454,21 +668,6 @@ def sum_all(*array):
 #pinit-highlight(1, 2)
 #pinit-point-from(2)[It is simple.]
 
-== 测试neoplot
-#figure(caption: [测试图片],
-  gp.exec(
-        // Set the width of the graph
-        width: 55%,
-        ```gnuplot
-        reset
-        set term svg size 500,400
-        set xrange[-2.5*pi:2.5*pi]
-        set yrange[-1.3:1.3]
-        plot sin(x), cos(x)
-        ```
-    ),
-)
-
 == 测试echarm
 #echarm.render(width: 100%, height: 30%, options: (
   legend: (
@@ -501,6 +700,17 @@ def sum_all(*array):
   ),
 ))
 
+== 测试suiji
+#{
+  let rng = gen-rng-f(42)
+  let a = ()
+  for i in range(5) {
+    (rng, a) = shuffle-f(rng, range(10))
+    [#(a.map(it => str(it)).join("  ")) \ ]
+  }
+}
+
+
 
 == 测试physica
 $
@@ -524,7 +734,7 @@ $
   quad
   ket(n^((1))) = sum_(k in.not D) mel(k^((0)), V, n^((0))) / (E_n^((0)) - E_k^((0))) ket(k^((0))),
   quad
-  integral_V dd(V) (pdv(cal(L), phi) - diff_mu (pdv(cal(L), (diff_mu phi)))) = 0 \
+  integral_V dd(V) (pdv(cal(L), phi) - partial_mu (pdv(cal(L), (partial_mu phi)))) = 0 \
   dd(s,2) = -(1-(2G M) / r) dd(t,2) + (1-(2G M) / r)^(-1) dd(r,2) + r^2 dd(Omega,2)
 $
 
@@ -541,76 +751,45 @@ $
     \,d\xi
 `)
 
-== 测试pintora
-```pintora
-mindmap
-@param layoutDirection TB
-+ UML Diagrams
-++ Behavior Diagrams
-+++ Sequence Diagram
-+++ State Diagram
-+++ Activity Diagram
-++ Structural Diagrams
-+++ Class Diagram
-+++ Component Diagram
-```
+== 测试zero
 
-== 测试unify
+#ztable(
+  columns: 4,
+  align: center,
+  format: (auto,) * 4,
+  $n$, $α$, $β$, $γ$,
+  table.hline(),
+  $Alpha$, "1.2+-2", "2e3", "1+-2e4",
+  $Beta$, "12+-23", "66e98", "-17+-2e-4",
+  $Gamma$, "0+-.2", "1e7", "-.23(2)e-4",
+)
 
-$ num("-1.32865+-0.50273e-6") $
-$ qty("1.3+1.2-0.3e3", "erg/cm^2/s", space: "#h(2mm)") $
-$ numrange("1,1238e-2", "3,0868e5", thousandsep: "'") $
-$ qtyrange("1e3", "2e3", "meter per second squared", per: "/", delimiter: "\"to\"") $
+== 测试pavemat
+#pavemat(
+  pave: (
+    "SDS(dash: 'solid')DDD]WW",
+    (path: "sdDDD", stroke: aqua.darken(30%))
+  ),
+  stroke: (dash: "dashed", thickness: 1pt, paint: yellow),
+  fills: (
+    "0-0": green.transparentize(80%),
+    "1-1": blue.transparentize(80%),
+    "[0-0]": green.transparentize(60%),
+    "[1-1]": blue.transparentize(60%),
+  ),
+  delim: "[",
+)[$mat(P, a, v, e; "", m, a, t)$]
 
-
-== 测试algo
-#algo(
-  title: [                    // note that title and parameters
-    #set text(size: 15pt)     // can be content
-    #emph(smallcaps("Fib"))
-  ],
-  parameters: ([#math.italic("n")],),
-  comment-prefix: [#sym.triangle.stroked.r ],
-  comment-styles: (fill: rgb(100%, 0%, 0%)),
-  indent-size: 15pt,
-  indent-guides: 1pt + gray,
-  row-gutter: 5pt,
-  column-gutter: 5pt,
-  inset: 5pt,
-  stroke: 2pt + black,
-  fill: none,
-)[
-  if $n < 0$:#i\
-    return null#d\
-  if $n = 0$ or $n = 1$:#i\
-    return $n$#d\
-  \
-  let $x <- 0$\
-  let $y <- 1$\
-  for $i <- 2$ to $n-1$:#i #comment[so dynamic!]\
-    let $z <- x+y$\
-    $x <- y$\
-    $y <- z$#d\
-    \
-  return $x+y$
-]
-
-#algo(title: "Floyd-Warshall", parameters: ("V", "E", "w"), indent-guides: 1pt + black, main-text-styles: (size: 15pt))[
-  Let $"dist"[u,v] <- infinity$ for $u,v$ in $V$\
-  For $(u,v)$ in $E$:#i\
-  $"dist"[u,v] <- w(u,v)$ #comment[edge weights] #d\
-  For $v$ in $V$:#i\
-  $"dist"[v,v] <- 0$ #comment[base case] #d\
-  \
-  For $k <- 1$ to $|V|$:#i\
-  For $i <- 1$ to $|V|$:#i\
-  For $j <- 1$ to $|V|$:#i\
-  #comment(inline: true)[if new path is shorter, reduce distance]\
-  If $"dist"[i,j] > "dist"[i,k] + "dist"[k,j]$:#i\
-  $"dist"[i,j] <- "dist"[i,k] + "dist"[k,j]$#d#d#d#d\
-  \
-  Return $"dist"$
-]
+#let a = $ mat(1, 2, 3; 4, 5, 6; 7, 8, 9; 10, 11, 12) $
+#pavemat(
+  a,
+  pave: "dSDSDSLLAAWASSDD",
+  fills: (
+    "1-1": red.transparentize(80%),
+    "1-2": blue.transparentize(80%),
+    "3-0": green.transparentize(80%),
+  ),
+)
 
 == 测试diagraph
 #raw-render(
@@ -627,13 +806,6 @@ $ qtyrange("1e3", "2e3", "meter per second squared", per: "/", delimiter: "\"to\
   labels: (big: [_some_#text(2em)[ big ]*text*], sum: $ sum_(i=0)^n 1 / i $),
   width: 100%,
 )
-
-== 测试xarrow
-$
-  a xarrow(sym: <--, QQ\, 1 + 1^4) b \
-  c xarrowSquiggly("very long boi") d \
-  c / ( a xarrowTwoHead("NP" limits(sum)^*) b times 4)
-$
 
 测试参考文献：\
 文献1的内容@impagliazzo2001problems \

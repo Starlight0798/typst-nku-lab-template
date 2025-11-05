@@ -1,4 +1,4 @@
-# typst-nku-lab-template
+# typst-zju-lab-template
 Typst 是可用于出版的可编程标记语言，拥有变量、函数与包管理等现代编程语言的特性，注重于科学写作 (science writing)，定位与 LaTeX 相似。
 
 - **语法简洁**：上手难度跟 Markdown 相当，文本源码阅读性高，不会像 LaTeX 一样充斥着反斜杠与花括号。
@@ -14,7 +14,7 @@ Typst WebApp：https://typst.app/
 
 ------
 
-_这是一份用于NKU实验报告的typst模板，涵盖封面，目录，标题，代码块，公式等内容。_
+_这是一份用于ZJU实验报告的typst模板，涵盖封面，目录，标题，代码块，公式等内容。_
 如果其他学校的同学想要使用这个模板，很简单，只需要把img目录下的两张图片换成自己学校的即可。
 
 ### 使用方法
@@ -40,7 +40,7 @@ _这是一份用于NKU实验报告的typst模板，涵盖封面，目录，标�
 	  department: "火星土木学院",
 	  date: (2077, 1, 1),
 	  show_content_figure: True	 // 是否在目录页加上图表的索引
-	  watermark: "NKU",  		// 水印，不写或写空字符串则无水印
+	  watermark: "ZJU",  		// 水印，不写或写空字符串则无水印
 	)
 	```
 

@@ -1,15 +1,6 @@
-#import "@preview/codly:1.3.0": *
-#import "@preview/codly-languages:0.1.10": *
-#import "@preview/chic-hdr:0.5.0": *
-#import "@preview/i-figured:0.2.4"
-#import "@preview/pintorita:0.1.4"
-#import "@preview/gentle-clues:1.2.0": *
-#import "@preview/cheq:0.3.0": checklist
-#import "@preview/unify:0.7.1": num, qty, numrange, qtyrange
-#import "@preview/thmbox:0.3.0": *
-#import "@preview/hydra:0.6.2": hydra
+#import "imports.typ": *
 
-#let Songti = ("Times New Roman", "Songti SC", "Songti TC", "SimSun")
+#let Songti = ("Times New Roman", "Songti SC", "Songti TC")
 #let Heiti = ("Times New Roman", "Heiti SC", "Heiti TC", "SimHei")
 
 #let indent() = {
@@ -44,8 +35,8 @@
   set page("a4")
   // 封面
   align(center)[
-    #image("./img/NKU-name.png", width: 70%)
-    #v(2em)
+    #v(-2em)
+    #image("./img/ZJU-name.png", width: 60%)
     #set text(
       size: 26pt,
       font: Songti,
@@ -62,7 +53,7 @@
     #text(size: 22pt, font: Songti)[
       _#lab_name _
     ]
-    #image("./img/NKU-logo.png", width: 40%)
+    #image("./img/ZJU-logo.png", width: 40%)
     #v(0.5em)
 
     // 个人信息
@@ -179,7 +170,6 @@
   // 代码段设置
   show: codly-init.with()
   codly(languages: codly-languages)
-  show raw.where(lang: "pintora"): it => pintorita.render(it.text)
 
   // 水印
   set page(background: rotate(-60deg,
