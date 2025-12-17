@@ -744,6 +744,7 @@ $
 $
 
 == 测试mitex
+#mi(`x`)
 #mitex(`
   \newcommand{\f}[2]{#1f(#2)}
   \f\relax{x} = \int_{-\infty}^\infty

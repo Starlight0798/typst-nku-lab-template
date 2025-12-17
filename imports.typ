@@ -15,7 +15,7 @@
 #import "@preview/badgery:0.1.1": badge-gray, badge-red, badge-yellow, badge-green, badge-purple, badge-blue, ui-action, menu
 #import "@preview/tdtr:0.3.0": tidy-tree-graph, tidy-tree-draws
 #import "@preview/physica:0.9.7": curl, grad, tensor, pdv, vb, dmat, dd, dv, hmat, vu, Set, laplacian, hbar, ket, mel, signals
-#import "@preview/mitex:0.2.5": mitex
+#import "@preview/mitex:0.2.6": mitex, mi
 #import "@preview/diagraph:0.3.6": raw-render
 #import "@preview/pyrunner:0.3.0" as py
 #import "@preview/note-me:0.5.0" as nt
